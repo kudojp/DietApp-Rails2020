@@ -1,0 +1,11 @@
+TODO: show user's profile
+
+<div><%= @user.username %></div>
+<div>
+    <% unless @user.is_male.nil? %>
+        <%= @user.is_male ? '男' : '女' %>
+    <% end %>
+</div>
+<div><%= @user.weight %></div>
+<div><%= @user.height %></div>
+<div><%= @user.comment %></div>
