@@ -1,0 +1,2 @@
+console.log("Successfully followed")
+$('#follow_form').html("<%= escape_javascript(render(partial: 'users/unfollow', locals: {user: @followed_user})) %>");

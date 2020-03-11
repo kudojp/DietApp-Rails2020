@@ -2,11 +2,12 @@
 <p>Find me in app/views/home/index.html.erb</p>
 
 <% if user_signed_in? %>
-<p>you are now logged in</p>
-<p>Post new meal</p>
-<p>All following users</p>
-<p>All followed users</p>
+<p>you are loggging in</p>
+<p><%= link_to 'My Profile', user_path(@user) %></p>
+<p><%= link_to 'Following', followings_user_path(@user) %></p>
+<p><%= link_to 'Followers', followers_user_path(@user) %></p>
 
+<p>Post new meal</p>
 
 <% else %>
 Sign up now!

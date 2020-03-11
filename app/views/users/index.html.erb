@@ -1,4 +1,7 @@
-TODO: show followed users
-<% @users.each do |user| %>%
-    <%= user.email %>
+<%= @title %>
+
+<% @users.each do |user| %>
+    <p>
+    <%= render partial: "users/user", locals: {user: user} %>
+    </p>
 <% end %>

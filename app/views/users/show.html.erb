@@ -1,6 +1,6 @@
-TODO: show user's profile
+TODO: show 1 user's detail
 
-<div><%= @user.username %></div>
+<div><%= @user.email %></div>
 <div>
     <% unless @user.is_male.nil? %>
         <%= @user.is_male ? '男' : '女' %>
@@ -9,3 +9,7 @@ TODO: show user's profile
 <div><%= @user.weight %></div>
 <div><%= @user.height %></div>
 <div><%= @user.comment %></div>
+
+<%= link_to "Following", followings_user_path(@user) %>
+<%= link_to "Followers", followers_user_path(@user) %>
+<%= render partial: 'users/follow_form', locals: {user: @user}%>

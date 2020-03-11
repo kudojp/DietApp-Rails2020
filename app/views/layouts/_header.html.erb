@@ -4,6 +4,10 @@
             <div class="float-right">
                 <% if user_signed_in? %>
 
+                    <div >
+                        <%= link_to "All Users", users_path %>
+                    </div>
+
                     <div class="dropdown show">
                         <a class="btn btn-white dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <%= current_user.username%>
