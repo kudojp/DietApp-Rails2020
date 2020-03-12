@@ -1,5 +1,6 @@
-# TODO: This is each user's profile
-<%= link_to user.email, user_path(user) %>
-<%= link_to 'Following', followings_user_path(user) %>
-<%= link_to 'Followers', followers_user_path(user) %>
-<%= render partial: 'users/follow_form', locals: {user: user}%>
+<div class="card">
+    <%= link_to user.email, user_path(user) %>
+    <%= link_to 'Following', followings_user_path(user) %>
+    <%= link_to 'Followers', followers_user_path(user) %>
+    <%= render partial: 'users/follow_form', locals: {user: user}%>
+</div>
