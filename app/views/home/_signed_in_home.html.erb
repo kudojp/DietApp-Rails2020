@@ -1,16 +1,18 @@
-<h1 class="row mb-5"><%= "Welcome back, #{@user.name}!" %></h1>
-<div class="row">
-    <div class="col-4">
+<h1 class='row mb-5'><%= "Welcome back, #{@user.name}!" %></h1>
+<div class='row'>
+    <div class='col-4'>
         <p><%= link_to 'My Profile', user_path(@user) %></p>
         <p><%= link_to 'Followings', followings_user_path(@user) %></p>
         <p><%= link_to 'Followers', followers_user_path(@user) %></p>
     </div>
 
-    <div class="col-4">
-        MealPost一覧
+    <div class='col-4'>
+        <% meal_posts&.each do |meal_post| %>
+            <%= render partial: 'meal_posts/meal_post', locals: {meal_post: meal_post} %>
+        <% end %>
     </div>
 
-    <div class="col-4">
-        なんか
+    <div class='col-4'>
+        <%= render partial: 'meal_posts/new'%>
     </div>
 </div>

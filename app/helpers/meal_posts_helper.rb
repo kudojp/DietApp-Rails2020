@@ -1,0 +1,2 @@
+module MealPostsHelper
+end

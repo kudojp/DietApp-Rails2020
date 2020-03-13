@@ -13,6 +13,7 @@ class User < ApplicationRecord
 
   has_many :followings, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
+  has_many :meal_posts
 
   validates :name, presence: true, length: { maximum: 20 }
   validates :account_id, presence: true, length: { maximum: 15 }, uniqueness: true
@@ -27,5 +28,10 @@ class User < ApplicationRecord
 
   def following?(other_user)
     followings.include?(other_user)
+  end
+
+  def meal_posts_feed
+    following_ids = 'SELECT followed_id FROM relationships WHERE follower_id = :user_id'
+    MealPost.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
   end
 end

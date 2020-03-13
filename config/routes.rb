@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   end
 
   resources :relationships, only: %i[create destroy]
+  resources :meal_posts, only: %i[create destroy show]
 end
