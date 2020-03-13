@@ -1,14 +1,5 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
-
 <% if user_signed_in? %>
-<p>you are loggging in</p>
-<p><%= link_to 'My Profile', user_path(@user) %></p>
-<p><%= link_to 'Following', followings_user_path(@user) %></p>
-<p><%= link_to 'Followers', followers_user_path(@user) %></p>
-
-<p>Post new meal</p>
-
+    <%= render partial: "home/signed_in_home"%>
 <% else %>
-Sign up now!
+    <%= render partial: "home/not_signed_in_home"%>
 <% end %>

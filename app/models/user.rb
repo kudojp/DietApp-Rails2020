@@ -14,9 +14,8 @@ class User < ApplicationRecord
   has_many :followings, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
-  # TODO: add validations
-  # account_id should be present, unique...
-  # account_id should have @ as an initial characters
+  validates :name, presence: true, length: { maximum: 20 }
+  validates :account_id, presence: true, length: { maximum: 15 }, uniqueness: true
 
   def follow(other_user)
     followings << other_user

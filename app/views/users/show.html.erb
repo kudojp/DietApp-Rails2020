@@ -1,6 +1,4 @@
-TODO: show 1 user's detail
-
-<div><%= @user.email %></div>
+<h1><%= @user.name + " (" + @user.account_id + ")" %><%= render partial: 'users/follow_form', locals: {user: @user}%></h1>
 <div>
     <% unless @user.is_male.nil? %>
         <%= @user.is_male ? '男' : '女' %>
@@ -10,6 +8,5 @@ TODO: show 1 user's detail
 <div><%= @user.height %></div>
 <div><%= @user.comment %></div>
 
-<%= link_to "Following", followings_user_path(@user) %>
+<%= link_to "Followings", followings_user_path(@user) %>
 <%= link_to "Followers", followers_user_path(@user) %>
-<%= render partial: 'users/follow_form', locals: {user: @user}%>

@@ -1,6 +1,11 @@
 <div class="card">
-    <%= link_to user.email, user_path(user) %>
-    <%= link_to 'Following', followings_user_path(user) %>
-    <%= link_to 'Followers', followers_user_path(user) %>
-    <%= render partial: 'users/follow_form', locals: {user: user}%>
+    <div class="card-header">
+        <%= link_to user.name + " (" + user.account_id + ")", user_path(user) %>
+        <%= render partial: 'users/follow_form', locals: {user: user}%>
+    </div>
+    <div class="card-body">
+        <div><%= user.comment %></div>
+        <%= link_to 'Following', followings_user_path(user) %>
+        <%= link_to 'Followers', followers_user_path(user) %>
+    </div>
 </div>
