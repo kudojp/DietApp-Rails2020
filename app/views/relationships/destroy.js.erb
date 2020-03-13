@@ -1,2 +1,2 @@
 console.log("Successfully unfollowed");
-$('#follow_form').html("<%= escape_javascript(render(partial: 'users/follow', locals: {user: @followed_user})) %>");
+$("#follow_form form[data-user-id='<%= @followed_user.id %>']").replaceWith("<%= escape_javascript(render(partial: 'users/follow', locals: {user: @followed_user})) %>");
