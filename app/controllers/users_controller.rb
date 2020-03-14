@@ -18,5 +18,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @meal_posts = @user&.meal_posts
   end
 end

@@ -7,9 +7,7 @@
     </div>
 
     <div class='col-4'>
-        <% meal_posts&.each do |meal_post| %>
-            <%= render partial: 'meal_posts/meal_post', locals: {meal_post: meal_post} %>
-        <% end %>
+        <%= render template: 'meal_posts/index', locals: {meal_posts: meal_posts} %>
     </div>
 
     <div class='col-4'>
