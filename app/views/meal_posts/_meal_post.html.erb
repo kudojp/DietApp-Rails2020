@@ -1,7 +1,11 @@
-<div class="card">
+<div class="card", data-meal-post-id="<%= meal_post.id %>">
     <div class="card-header">
         <%= link_to meal_post.user.name, user_path(meal_post.user) %>
     </div>
-    <p><%= link_to meal_post.content, meal_post_path(meal_post)%></p>
+    <p><%= link_to meal_post.content, meal_post_path(meal_post) %></p>
     <p class="small"><%= meal_post.time %></p>
+    <% if current_user == meal_post.user %>
+        <%= link_to "Delete this post", meal_post_path(meal_post),
+        method: "delete", remote: true %>
+    <% end %>
 </div>

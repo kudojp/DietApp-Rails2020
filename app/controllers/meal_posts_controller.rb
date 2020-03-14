@@ -1,10 +1,31 @@
 class MealPostsController < ApplicationController
+  # TODO: authentication
+
   def create
-    current_user.meal_posts.build(meal_post_params).save
+    @new_meal_post = current_user.meal_posts.build(meal_post_params)
+    if @new_meal_post.save
+      respond_to do |format|
+        # TODO: freiendly forwardingを実装
+        format.html { redirect_to root }
+        format.js
+      end
+    else
+      # TODO: save失敗時の処理
+    end
   end
 
-  # TODO
-  def destroy; end
+  def destroy
+    @meal_post = MealPost.find(params[:id])
+    if @meal_post.destroy
+      respond_to do |format|
+        # TODO: freiendly forwardingを実装
+        format.html { redirect_to root }
+        format.js
+      end
+    else
+      # TODO: destroy失敗時の処理
+    end
+  end
 
   def show
     @meal_post = MealPost.find(params[:id])
