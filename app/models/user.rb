@@ -15,8 +15,10 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :meal_posts
 
-  validates :name, presence: true, length: { maximum: 20 }
-  validates :account_id, presence: true, length: { maximum: 15 }, uniqueness: true
+  before_validation :strip_whitespaces, only: %i[name account_id]
+  validates :name, presence: true, length: { in: 1..20 }
+  validates :account_id, presence: true, length: { in: 5..15 }, uniqueness: true,
+                         format: { with: /\A[A-Za-z0-9]+\z/, message: 'should be alphanumeric' }
 
   def follow(other_user)
     followings << other_user
@@ -33,5 +35,12 @@ class User < ApplicationRecord
   def meal_posts_feed
     following_ids = 'SELECT followed_id FROM relationships WHERE follower_id = :user_id'
     MealPost.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
+  end
+
+  private
+
+  def strip_whitespaces
+    name&.strip!
+    account_id&.strip!
   end
 end
