@@ -1,6 +1,8 @@
 class RelationshipsController < ApplicationController
   before_action :user_signed_in?
+
   def create
+    # TODO: what if not-existing/already-following user_id is specitied?
     @followed_user = User.find(params[:followed_id])
     current_user.follow(@followed_user)
 
@@ -11,6 +13,7 @@ class RelationshipsController < ApplicationController
   end
 
   def destroy
+    # TODO: what if not-existing/not-followign user_id is specitied?
     @followed_user = Relationship.find(params[:id]).followed
     current_user.unfollow(@followed_user)
 
