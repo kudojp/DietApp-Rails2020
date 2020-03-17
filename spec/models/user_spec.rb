@@ -1,12 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe 'validation' do
-    it 'is valid with email, account_id, name, password' do
+  describe 'FactoryBot' do
+    it 'instantiate valid model with email, account_id, name, password' do
       user = build(:user)
       expect(user).to be_valid
     end
+  end
 
+  describe 'validation' do
     it 'is invalid without email' do
       user = build(:user, email: nil)
       user.valid?
@@ -108,38 +110,32 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#follow(user)' do
-  end
+  describe '#follow(user)/#unfollow(user)' do
+    it 'creates/destroys relationship in Realtionhsips table' do
+      user = create(:user)
+      another = create(:user, email: 'another@test.test', account_id: 'another')
 
-  describe '#unfollow(user)' do
+      # follow
+      user.follow(another)
+      expect(Relationship.where(follower_id: user.id, followed_id: another.id)).to exist
+
+      # unfollow
+      user.unfollow(another)
+      expect(Relationship.where(follower_id: user.id, followed_id: another.id)).not_to exist
+    end
   end
 
   describe '#following?(user)' do
+    it 'returns array of following' do
+      user = create(:user)
+      another = create(:user, email: 'another@test.test', account_id: 'another')
+      user.follow(another)
+
+      expect(user.following?(another)).to be_truthy
+    end
   end
 
   describe '#meal_posts_feed' do
+    # TODO
   end
-
-  # it 'is possible to follow another user' do
-  # end
-
-  # it 'is posssible to unfollow another user' do
-  # end
-
-  # it 'is possible to get an array of following users' do
-  # end
-
-  # it 'is possible to check whether a user is following another user' do
-  # end
-
-  # it 'is possible to get meal_posts_feed (an array of all meal_posts followed by a user)' do
-  # end
 end
-
-# account_id should be unique, 5-15? 英数
-# name should be unique, 1-20, 英数平仮名
-# follow(other_user)
-# followings()
-# unfollow(other_user)
-# following?(other_user)
-# meal_posts_feed¥
