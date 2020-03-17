@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Relationship, type: :model do
-  # associationを持つモデルのFactoryからbuildするとbe_validにならない
-  let(:rel) { create(:relationship) }
+  let(:rel) { build(:relationship, follower: create(:user), followed: create(:user, email: 'another@test.com', account_id: 'another')) }
 
   describe 'FacrtoryBot' do
     it 'instantiates valid relationship model' do
@@ -24,6 +23,7 @@ RSpec.describe Relationship, type: :model do
     end
 
     it 'is invalid when duplicated model exists' do
+      rel.save
       another_rel = build(:relationship, follower_id: rel[:follower_id], followed_id: rel[:followed_id])
       another_rel.valid?
       expect(another_rel.errors[:follower_id]).to include('has already been taken')
