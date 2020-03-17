@@ -16,12 +16,7 @@ class MealPostsController < ApplicationController
 
   def destroy
     @meal_post = MealPost.find(params[:id])
-
-    if @meal_post.nil?
-      redirect_to root_path, alert: 'This post you requested to delete does not exist'
-    elsif @meal_post.user_id == current_user
-      redirect_to root_path, alert: 'You are not authorized to delete the post'
-    end
+    redirect_to root_path, alert: 'You are not authorized to delete the post' if @meal_post.user_id == current_user
 
     if @meal_post.destroy
       respond_to do |format|

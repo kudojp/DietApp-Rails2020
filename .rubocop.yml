@@ -15,3 +15,6 @@ Metrics/MethodLength:
 
 Metrics/AbcSize:
   Enabled: false
+
+Style/AsciiComments:
+  Enabled: false

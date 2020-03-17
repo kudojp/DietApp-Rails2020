@@ -1,5 +1,5 @@
 class RelationshipsController < ApplicationController
-  before_action :user_signed_in?
+  before_action :authenticate_user!
 
   def create
     # TODO: what if not-existing/already-following user_id is specitied?
