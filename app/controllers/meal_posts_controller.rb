@@ -33,10 +33,6 @@ class MealPostsController < ApplicationController
     @meal_post = MealPost.find(params[:id])
   end
 
-  def index
-    @meal_posts = User.find(params[:id]).meal_posts
-  end
-
   private
 
   def meal_post_params
