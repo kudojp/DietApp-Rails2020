@@ -1,7 +1,5 @@
 <h1><%= @title %></h1>
 
 <% @users.each do |user| %>
-    <p>
-    <%= render partial: "users/user", locals: {user: user} %>
-    </p>
+  <p><%= render partial: "users/user", locals: {user: user} %></p>
 <% end %>

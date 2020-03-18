@@ -20,7 +20,7 @@ class MealPostsController < ApplicationController
 
     if @meal_post.destroy
       respond_to do |format|
-        # TODO: freiendly forwardingを実装
+        # TODO: friendly forwardingを実装
         format.html { redirect_to root }
         format.js
       end

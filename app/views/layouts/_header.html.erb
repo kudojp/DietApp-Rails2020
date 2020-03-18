@@ -1,29 +1,29 @@
 <div class="row">
-    <div class="col-12 pt-3 pb-3">
-        <div class="float-right">
-            <% if user_signed_in? %>
+  <div class="col-12 pt-3 pb-3">
+    <div class="float-right">
+      <% if user_signed_in? %>
 
-                <div >
-                    <%= link_to "All Users", users_path %>
-                </div>
-
-                <div class="dropdown show">
-                    <a class="btn btn-white dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <%= current_user.name%>
-                    </a>
-
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <%= link_to "Profile", user_path(current_user.id), class: "dropdown-item" %>
-                        <%= link_to "Settings", edit_user_registration_path, class: "dropdown-item" %>
-                        <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-                    </div>
-                </div>
-            <% else %>
-                <%= link_to "Log In", new_user_session_path, class: "btn btn-outline-primary" %>
-                <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-outline-primary" %>
-            <% end %>
-
+        <div >
+          <%= link_to "All Users", users_path %>
         </div>
-        <p class="h3"><%= link_to "Diet App", root_path %></p>
+
+        <div class="dropdown show">
+          <a class="btn btn-white dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= current_user.name%>
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <%= link_to "Profile", user_path(current_user.id), class: "dropdown-item" %>
+            <%= link_to "Settings", edit_user_registration_path, class: "dropdown-item" %>
+            <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+          </div>
+        </div>
+      <% else %>
+        <%= link_to "Log In", new_user_session_path, class: "btn btn-outline-primary" %>
+        <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-outline-primary" %>
+      <% end %>
+
     </div>
+    <p class="h3"><%= link_to "Diet App", root_path %></p>
+  </div>
 </div>

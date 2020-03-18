@@ -1,9 +1,9 @@
 <h1><%= @user.name + " (" + @user.account_id + ")" %><%= render partial: 'users/follow_form', locals: {user: @user}%></h1>
 <h2>Profile</h2>
 <div>
-    <% unless @user.is_male.nil? %>
-        <%= @user.is_male ? '男' : '女' %>
-    <% end %>
+  <% unless @user.is_male.nil? %>
+    <%= @user.is_male ? '男' : '女' %>
+  <% end %>
 </div>
 <div><%= @user.weight %></div>
 <div><%= @user.height %></div>
