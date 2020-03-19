@@ -33,8 +33,8 @@ class User < ApplicationRecord
   end
 
   def meal_posts_feed
-    following_ids = 'SELECT followed_id FROM relationships WHERE follower_id = :user_id'
-    MealPost.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
+    following_users_and_self = followings + [self]
+    MealPost.where(user: following_users_and_self)
   end
 
   private
