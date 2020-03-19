@@ -1,33 +1,17 @@
 <!-- partial for posting new meal -->
 
 <%= form_for @new_meal_post, remote: true do |f| %>
-
   <div class="field">
     <%= f.label :content %><br />
     <%= f.text_field :content %>
   </div>
 
-  <%= f.label :time %>
-  <%= raw sprintf(
-    f.datetime_select(
-      :time,# プロパティ名
-      {
-        start_year:     Time.zone.now.prev_year.year,# 選択可能な開始年
-        default:        Time.zone.now,# デフォルトの年
-        use_two_digit_numbers: true,# 月日を2桁の値で表示
-        date_separator: '%s',# 年, 月
-        datetime_separator: '%s',# 日
-        time_separator: '%s'# 時
-      },# オプション
-      { class: 'date-select' }# htmlオプションを指定する場合は別で指定
-    ),
-    '年 ', '月 ', '日 ', '時 ') + '分'# 分 は最後につけ加えられる
-  %>
+  <div class="field">
+    <%= f.label :time %>
+    <%= f.text_field :time, class: 'datetimepicker' %>
+  </div>
 
   <!-- TODO: 画像もアップロードできるようにする -->
 
-  <div class="actions">
-    <%= f.submit "Submit" %>
-  </div>
-
+  <%= f.submit "Submit" %>
 <% end %>

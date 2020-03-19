@@ -17,3 +17,15 @@ require("jquery");
 
 import "bootstrap";
 import "../src/application.scss";
+
+import "flatpickr/dist/flatpickr.css";
+import flatpickr from "flatpickr";
+
+$(document).ready(function() {
+  flatpickr(".datetimepicker", {
+    altInput: true,
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+    inline: true
+  });
+});
