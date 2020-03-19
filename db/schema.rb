@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_13_135022) do
+ActiveRecord::Schema.define(version: 2020_03_19_191628) do
 
   create_table "meal_posts", force: :cascade do |t|
     t.text "content"
@@ -50,5 +50,18 @@ ActiveRecord::Schema.define(version: 2020_03_13_135022) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "votes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "meal_post_id", null: false
+    t.boolean "is_upvote", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["meal_post_id"], name: "index_votes_on_meal_post_id"
+    t.index ["user_id", "meal_post_id", "is_upvote"], name: "index_votes_on_user_id_and_meal_post_id_and_is_upvote", unique: true
+    t.index ["user_id"], name: "index_votes_on_user_id"
+  end
+
   add_foreign_key "meal_posts", "users"
+  add_foreign_key "votes", "meal_posts"
+  add_foreign_key "votes", "users"
 end
