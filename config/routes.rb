@@ -8,9 +8,12 @@ Rails.application.routes.draw do
     member do
       get :followings, to: 'users#followings_index'
       get :followers, to: 'users#followers_index'
+      get :upvotes, to: 'meal_posts#upvoted_index'
+      get :downvotes, to: 'meal_posts#downvoted_index'
     end
   end
 
   resources :relationships, only: %i[create destroy]
   resources :meal_posts, only: %i[create destroy show]
+  resources :votes, only: %i[create destroy]
 end

@@ -38,6 +38,14 @@ class MealPostsController < ApplicationController
     @meal_post = MealPost.find(params[:id])
   end
 
+  def upvoted_index
+    # TODO
+  end
+
+  def downvoted_index
+    # TODO
+  end
+
   private
 
   def meal_post_params
