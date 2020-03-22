@@ -27,7 +27,7 @@ RSpec.describe Vote, type: :model do
     it 'is invlaid without is_upvote' do
       vote.is_upvote = nil
       vote.save
-      expect(vote.errors[:is_upvote]).to include("can't be blank")
+      expect(vote.errors[:is_upvote]).to include('is not included in the list')
     end
   end
 end
