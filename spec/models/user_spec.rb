@@ -2,8 +2,6 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:user) { create(:user) }
-  let(:vote) { create(:vote) }
-
   describe 'FactoryBot' do
     it 'instantiate valid model with email, account_id, name, password' do
       user = build(:user)
@@ -36,18 +34,20 @@ RSpec.describe User, type: :model do
       expect(user.errors[:password]).to include("can't be blank")
     end
 
-    it 'is invalid to exist duplicated account_ids' do
-      user # instantiate from FactoryBot
-      another_user = build(:user, email: 'anothertest@test.com')
-      another_user.valid?
-      expect(another_user.errors[:account_id]).to include('has already been taken')
-    end
-
-    it 'is invalid to exist duplicated names' do
-      user # instantiate from FactoryBot
-      another_user = build(:user, account_id: 'anothertesttest')
+    it 'is invalid to exist duplicated emails' do
+      user.email = 'duplicated@test.com'
+      user.save
+      another_user = build(:user, email: 'duplicated@test.com')
       another_user.valid?
       expect(another_user.errors[:email]).to include('has already been taken')
+    end
+
+    it 'is invalid to exist duplicated account_ids' do
+      user.account_id = 'duplicated'
+      user.save
+      another_user = build(:user, account_id: 'duplicated')
+      another_user.valid?
+      expect(another_user.errors[:account_id]).to include('has already been taken')
     end
 
     it 'should be certain that account_id consists 5-15 letters' do
@@ -138,8 +138,8 @@ RSpec.describe User, type: :model do
 
   describe '#meal_posts_feed' do
     it 'returns meal_posts posted by followitng users in the correct order' do
-      followed_user = create(:user, email: 'followed@test.test', account_id: 'followed')
-      not_followed_user = create(:user, email: 'not_followed@test.test', account_id: 'notfollowed')
+      followed_user = create(:user)
+      not_followed_user = create(:user)
 
       followed_old_post = create(:meal_post, user: followed_user, time: '2010/04/14 21:45:22')
       followed_mid_post = create(:meal_post, user: followed_user, time: '2012/04/14 21:45:22')
@@ -158,19 +158,4 @@ RSpec.describe User, type: :model do
       expect(posts_feed[2]).to eq(followed_old_post)
     end
   end
-
-  describe '#is_upvote?' do
-    it 'returns nil when current user has neither upvoted nor downvoted given meal_post' do
-      expect(user.upvote?(vote)).to be_nil
-    end
-
-    it 'returns true when current user has upvoted a given meal_post' do
-      user.upvote
-      expect()
-    end
-
-    it 'returns true when current user has downvoted a given meal_post' do
-      expect()
-    end
-  ends
 end
