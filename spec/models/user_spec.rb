@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:user) { create(:user) }
+  let(:vote) { create(:vote) }
 
   describe 'FactoryBot' do
     it 'instantiate valid model with email, account_id, name, password' do
@@ -157,4 +158,19 @@ RSpec.describe User, type: :model do
       expect(posts_feed[2]).to eq(followed_old_post)
     end
   end
+
+  describe '#is_upvote?' do
+    it 'returns nil when current user has neither upvoted nor downvoted given meal_post' do
+      expect(user.upvote?(vote)).to be_nil
+    end
+
+    it 'returns true when current user has upvoted a given meal_post' do
+      user.upvote
+      expect()
+    end
+
+    it 'returns true when current user has downvoted a given meal_post' do
+      expect()
+    end
+  ends
 end
