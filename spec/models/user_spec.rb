@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:user) { create(:user) }
+  let(:vote) { create(:vote) }
+  let(:meal_post) { create(:meal_post) }
+
   describe 'FactoryBot' do
     it 'instantiate valid model with email, account_id, name, password' do
       user = build(:user)
@@ -156,6 +159,99 @@ RSpec.describe User, type: :model do
       expect(posts_feed[0]).to eq(followed_new_post)
       expect(posts_feed[1]).to eq(followed_mid_post)
       expect(posts_feed[2]).to eq(followed_old_post)
+    end
+  end
+
+  describe '#voted?' do
+    it 'returns true if is_upvote=true is given when current user has alredy upvoted to given meal_post' do
+      vote.meal_post = meal_post
+      vote.user = user
+      vote.save
+      expect(user.voted?(true, meal_post)).to be_truthy
+      expect(user.voted?(false, meal_post)).to be_falsey
+    end
+
+    it 'returns true if is_upvote=false is given when current user has already downvoted to given meal_post' do
+      vote.meal_post = meal_post
+      vote.user = user
+      vote.is_upvote = false
+      vote.save
+      expect(user.voted?(false, meal_post)).to be_truthy
+      expect(user.voted?(true, meal_post)).to be_falsey
+    end
+
+    it 'returns false when current user has not voted to given meal_post' do
+      expect(user.voted?(true, vote)).to be_falsey
+      expect(user.voted?(false, vote)).to be_falsey
+    end
+  end
+
+  describe '#change_vote_state' do
+    it 'changes state to upvoted: push upvote when not voted' do
+      returned_vote = user.change_vote_state(true, meal_post)
+      expected_attributes = { user: user, meal_post: meal_post, is_upvote: true }
+
+      expect(Vote.where(user: user, meal_post: meal_post, is_upvote: true)).to exist
+      expect(returned_vote).to have_attributes(expected_attributes)
+    end
+
+    it 'changes state to downvoted: push downvote when not voted' do
+      returned_vote = user.change_vote_state(false, meal_post)
+      expected_attributes = { user: user, meal_post: meal_post, is_upvote: false }
+
+      expect(Vote.where(user: user, meal_post: meal_post, is_upvote: false)).to exist
+      expect(returned_vote).to have_attributes(expected_attributes)
+    end
+
+    it 'change state to not voted: push upvote when upvoted ' do
+      vote.user = user
+      vote.meal_post = meal_post
+      vote.is_upvote = true
+      vote.save
+
+      returned_vote = user.change_vote_state(true, meal_post)
+
+      expect(Vote.where(user: user, meal_post: meal_post)).to be_empty
+      expect(returned_vote).to be_nil
+    end
+
+    it 'changes state to downvoted: push downvote when upvoted' do
+      vote.user = user
+      vote.meal_post = meal_post
+      vote.is_upvote = true
+      vote.save
+
+      returned_vote = user.change_vote_state(false, meal_post)
+      expected_attributes = { user: user, meal_post: meal_post, is_upvote: false }
+
+      expect(Vote.where(user: user, meal_post: meal_post, is_upvote: false)).to exist
+      expect(returned_vote).to have_attributes(expected_attributes)
+    end
+
+    it 'changes state to upvoted: push upvote when downvoted' do
+      vote.user = user
+      vote.meal_post = meal_post
+      vote.is_upvote = false
+      vote.save
+
+      returned_vote = user.change_vote_state(true, meal_post)
+      expected_attributes = { user: user, meal_post: meal_post, is_upvote: true }
+
+      expect(Vote.where(user: user, meal_post: meal_post, is_upvote: true)).to exist
+      expect(returned_vote).to have_attributes(expected_attributes)
+    end
+
+    it 'change state to not voted: push downvote when downvoted ' do
+      vote.user = user
+      vote.meal_post = meal_post
+      vote.is_upvote = false
+      vote.save
+
+      returned_vote = user.change_vote_state(false, meal_post)
+
+      expected_attributes = { user: user, meal_post: meal_post, is_upvote: false }
+      expect(Vote.where(user: user, meal_post: meal_post)).to be_empty
+      expect(returned_vote).to be_nil
     end
   end
 end

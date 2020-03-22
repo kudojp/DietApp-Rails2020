@@ -37,6 +37,27 @@ class User < ApplicationRecord
     MealPost.where(user: following_users_and_self)
   end
 
+  # returns
+  #     true (when given meal_post is already up(down)voted by current user)
+  #     false (when given meal_post is not up(down)voted by current user yet)
+  def voted?(is_upvote, meal_post)
+    !Vote.where(user: self, meal_post: meal_post, is_upvote: is_upvote).empty?
+  end
+
+  # returns
+  #     Vote object (when vote is successfully updated)
+  #     nil (when vote from curent user to given vote in the same direction already exists)
+  def change_vote_state(pushed_upvote, meal_post)
+    # If already voted in the same direction...
+    if voted?(pushed_upvote, meal_post)
+      Vote.where(user: self, meal_post: meal_post, is_upvote: pushed_upvote).destroy_all
+      return
+    end
+
+    Vote.where(user: self, meal_post: meal_post).destroy_all
+    Vote.create(user: self, meal_post: meal_post, is_upvote: pushed_upvote)
+  end
+
   private
 
   def strip_whitespaces
