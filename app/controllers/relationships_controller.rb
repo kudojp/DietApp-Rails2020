@@ -14,7 +14,16 @@ class RelationshipsController < ApplicationController
       end
     end
 
-    current_user.follow(@followed_user)
+    begin
+      current_user.follow(@followed_user)
+    rescue ActiveRecord::RecordInvalid => e
+      return respond_to do |format|
+        format.html { redirect_to @followed_user, status: :see_other, notice: e }
+        format.js do
+          render template: 'relationships/follow_failure', locals: { message: e }, status: :bad_request
+        end
+      end
+    end
 
     respond_to do |format|
       format.html { redirect_to @followed_user, notice: 'You successfully followed this user.' }
