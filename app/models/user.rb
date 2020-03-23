@@ -13,8 +13,8 @@ class User < ApplicationRecord
 
   has_many :followings, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
-  has_many :meal_posts
-  has_many :votes
+  has_many :meal_posts, dependent: :destroy
+  has_many :votes, dependent: :destroy
 
   before_validation :strip_whitespaces, only: %i[name account_id]
   validates :name, presence: true, length: { in: 1..20 }

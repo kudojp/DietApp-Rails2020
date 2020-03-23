@@ -1,6 +1,6 @@
 class MealPost < ApplicationRecord
   belongs_to :user
-  has_many :votes
+  has_many :votes, dependent: :destroy
   default_scope { order(time: :desc) }
 
   before_validation :strip_whitespaces, only: %i[content]
