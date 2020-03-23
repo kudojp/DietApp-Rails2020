@@ -7,6 +7,6 @@ class CreateVotes < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
-    add_index :votes, %i[user_id meal_post_id is_upvote], unique: true
+    add_index :votes, %i[user_id meal_post_id], unique: true
   end
 end

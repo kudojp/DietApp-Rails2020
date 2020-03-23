@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2020_03_19_191628) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["meal_post_id"], name: "index_votes_on_meal_post_id"
-    t.index ["user_id", "meal_post_id", "is_upvote"], name: "index_votes_on_user_id_and_meal_post_id_and_is_upvote", unique: true
+    t.index ["user_id", "meal_post_id"], name: "index_votes_on_user_id_and_meal_post_id", unique: true
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
