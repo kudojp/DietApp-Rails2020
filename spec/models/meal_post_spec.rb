@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe MealPost, type: :model do
   let(:meal_post) { create(:meal_post) }
   let(:user) { create(:user) }
+  let(:vote) { create(:vote) }
 
   describe 'FactoryBot' do
     it 'instantiates valid meal_post model' do
@@ -55,6 +56,22 @@ RSpec.describe MealPost, type: :model do
       expect(all_posts[0]).to eq(new_post)
       expect(all_posts[1]).to eq(mid_post)
       expect(all_posts[2]).to eq(old_post)
+    end
+  end
+
+  describe '#score' do
+    it 'returns the calculated score of votes to this meal_post' do
+      Vote.create(user: user, meal_post: meal_post, is_upvote: false)
+      expect(meal_post.score).to be(-1)
+
+      Vote.create(user: create(:user), meal_post: meal_post, is_upvote: false)
+      expect(meal_post.score).to be(-2)
+
+      Vote.create(user: create(:user), meal_post: meal_post, is_upvote: true)
+      expect(meal_post.score).to be(-1)
+
+      Vote.where(user: user, meal_post: meal_post).destroy_all
+      expect(meal_post.score).to be(0)
     end
   end
 end
