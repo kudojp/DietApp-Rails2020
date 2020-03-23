@@ -1,0 +1,2 @@
+console.log("Successfully voted");
+$('.vote').filter("[data-mealpost-id='<%= meal_post.id%>']").replaceWith("<%= escape_javascript(render(partial: 'votes/vote', locals: { meal_post: meal_post })) %>");

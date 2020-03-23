@@ -22,6 +22,8 @@ import "../src/application.scss";
 import "flatpickr/dist/flatpickr.css";
 import flatpickr from "flatpickr";
 
+require("../includes/vote.js")
+
 $(document).ready(function () {
   flatpickr(".datetimepicker", {
     altInput: true,
