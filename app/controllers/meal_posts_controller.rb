@@ -39,11 +39,13 @@ class MealPostsController < ApplicationController
   end
 
   def upvoted_index
-    # TODO
+    meal_posts = current_user.votes.where(is_upvote: true).map(&:meal_post)
+    render template: 'meal_posts/index', locals: { title: 'MealPost Upvoted by you', meal_posts: meal_posts }
   end
 
   def downvoted_index
-    # TODO
+    meal_posts = current_user.votes.where(is_upvote: false).map(&:meal_post)
+    render template: 'meal_posts/index', locals: { title: 'MealPost Downvoted by you', meal_posts: meal_posts }
   end
 
   private
