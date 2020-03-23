@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Vote, type: :model do
-  let!(:user1) { create(:user) }
-  let!(:meal_post1) { create(:meal_post, user: user1) }
+  let(:user1) { create(:user) }
+  let(:meal_post1) { create(:meal_post) }
   let(:vote) { build(:vote, user: user1, meal_post: meal_post1) }
 
   describe 'FactoryBot' do
@@ -28,6 +28,13 @@ RSpec.describe Vote, type: :model do
       vote.is_upvote = nil
       vote.save
       expect(vote.errors[:is_upvote]).to include('is not included in the list')
+    end
+
+    it 'is invalid to follow own post' do
+      meal_post1.user = user1
+      meal_post1.save
+      vote.save
+      expect(vote.errors[:meal_post]).to include('cannot vote own meal post')
     end
   end
 end

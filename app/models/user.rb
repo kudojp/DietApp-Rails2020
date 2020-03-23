@@ -56,7 +56,7 @@ class User < ApplicationRecord
     end
 
     Vote.where(user: self, meal_post: meal_post).destroy_all
-    Vote.create(user: self, meal_post: meal_post, is_upvote: pushed_upvote)
+    Vote.create!(user: self, meal_post: meal_post, is_upvote: pushed_upvote)
   end
 
   private
