@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <title>DietApp</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application' %>
+    <%= javascript_pack_tag 'application' %>
   </head>
 
-  <body>
+  <body class="container">
+    <%= render partial: "layouts/header"%>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
     <%= yield %>
+    <%= render partial: "layouts/footer"%>
   </body>
+
 </html>

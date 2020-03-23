@@ -1,24 +1,43 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 概要
 
-Things you may want to cover:
+これは、日々自分が食べたものを投稿し、それをフォロワーと共有するダイエットアプリです。
 
-* Ruby version
+## 本番環境
 
-* System dependencies
+https://diet-app-2020.herokuapp.com/users/sign_in
 
-* Configuration
+## 機能一覧
 
-* Database creation
+- ユーザー登録・ログイン機能（devise を使用）
+- フォロー機能 (Ajaxを使用)
+- 全ユーザー/フォロワー/フォロイングの一覧表示
+- 食事ポストの投稿機能（Ajaxを使用）
+- 食事ポストの投稿削除機能 (Ajaxを使用)
+- 自分がフォローしているユーザの投稿一覧表示機能
 
-* Database initialization
+## TODOs
 
-* How to run the test suite
+- フォロワー/フォロイング数の表示
+- プロフィールに画像を追加
+- ポストへのvote機能の追加
+- ポストへのコメント機能の追加
+- DMチャット機能の追加
+- Github ActionによるCI/CDの導入
+- Dockerの導入
+- AWS上にデプロイ
+- UIの洗練
 
-* Services (job queues, cache servers, search engines, etc.)
+## 使用技術
 
-* Deployment instructions
+- Ruby 2.6.3
+- Rails 6.0.2
+- RSpec
+- Heroku
+- GitHub, Git
 
-* ...
+## テスト
+
+- Rspec
+  - 単体テスト（モデル）

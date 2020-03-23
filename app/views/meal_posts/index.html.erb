@@ -1,0 +1,6 @@
+<!-- #TODO: POSTがないときはNO POSTくらい表示 -->
+<div class="meal-posts">
+  <% meal_posts&.each do |meal_post| %>
+    <%= render partial: 'meal_posts/meal_post', locals: {meal_post: meal_post} %>
+  <% end %>
+</div>

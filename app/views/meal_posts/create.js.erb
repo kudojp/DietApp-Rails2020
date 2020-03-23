@@ -1,0 +1,2 @@
+console.log("post successfully created");
+$(".meal-posts").find(".card").prepend("<%= escape_javascript(render(partial: 'meal_posts/meal_post', locals: {meal_post: @new_meal_post})) %>");

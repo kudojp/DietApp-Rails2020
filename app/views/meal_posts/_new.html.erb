@@ -1,0 +1,17 @@
+<!-- partial for posting new meal -->
+
+<%= form_for @new_meal_post, remote: true do |f| %>
+  <div class="field">
+    <%= f.label :content %><br />
+    <%= f.text_field :content %>
+  </div>
+
+  <div class="field">
+    <%= f.label :time %>
+    <%= f.text_field :time, class: 'datetimepicker' %>
+  </div>
+
+  <!-- TODO: 画像もアップロードできるようにする -->
+
+  <%= f.submit "Submit" %>
+<% end %>

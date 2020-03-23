@@ -1,0 +1,5 @@
+A page for 1 meal post
+
+<h1><%= @meal_post.content %></h1>
+<%= @meal_post.time %>
+<%= link_to @meal_post.user.name, user_path(@meal_post.user) %>
