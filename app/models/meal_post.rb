@@ -9,7 +9,7 @@ class MealPost < ApplicationRecord
   validates :content, presence: true, length: { maximum: 200 }
 
   def score
-    votes.all.count(&:is_upvote) - votes.all.count { |v| v.is_upvote == false }
+    votes.all.map { |v| v.is_upvote? ? 1 : -1 }.sum
   end
 
   private
