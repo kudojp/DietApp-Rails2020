@@ -4,7 +4,7 @@ $(function () {
 
     $.ajax({
       url: `/meal_posts/${meal_post_id}/upvote`,
-      method: "PUT",
+      method: "PATCH",
       dataType: 'script',
     })
   })
@@ -14,7 +14,7 @@ $(function () {
 
     $.ajax({
       url: `/meal_posts/${meal_post_id}/downvote`,
-      method: "PUT",
+      method: "PATCH",
       dataType: 'script'
     })
   })

@@ -15,8 +15,8 @@ Rails.application.routes.draw do
 
   resources :relationships, only: %i[create destroy]
   resources :meal_posts, only: %i[create destroy show] do
-    put :upvote, to: 'votes#upvote'
-    put :downvote, to: 'votes#downvote'
+    patch :upvote, to: 'votes#upvote'
+    patch :downvote, to: 'votes#downvote'
   end
   resources :votes, only: %i[create destroy]
 end
