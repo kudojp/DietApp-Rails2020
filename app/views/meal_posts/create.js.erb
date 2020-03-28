@@ -1,2 +1,3 @@
 console.log("post successfully created");
+// TODO: prependではなくtimeの順番にしたがってしかるべきところに挿入する
 $(".meal-posts").find(".card").first().prepend("<%= escape_javascript(render(partial: 'meal_posts/meal_post', locals: {meal_post: @new_meal_post})) %>");
