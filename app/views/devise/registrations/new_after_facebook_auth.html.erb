@@ -1,0 +1,25 @@
+<h2>Sign up after social auth</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: @user.email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name, "Display Name (1-20 alphanumeric characters besides surrounding blank spaces)" %><br />
+    <%= f.text_field :name, value: @user.name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :account_id, "Account ID (5-15 alphanumeric characters besides surrounding blank spaces)" %><br />
+    <%= f.text_field :account_id %>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>

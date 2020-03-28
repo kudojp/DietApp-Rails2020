@@ -20,3 +20,6 @@ Metrics/AbcSize:
 
 Style/AsciiComments:
   Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false

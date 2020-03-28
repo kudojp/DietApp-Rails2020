@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[facebook]
 
   has_many :active_relationships, class_name: 'Relationship',
                                   foreign_key: 'follower_id',
@@ -61,6 +61,20 @@ class User < ApplicationRecord
     end
     votes.where(meal_post: meal_post).destroy_all
     votes.create!(meal_post: meal_post, is_upvote: pushed_upvote)
+  end
+
+  def self.find_from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if (session_data = session['devise.facebook'])
+        user.provider = session_data['provider']
+        user.uid = session_data['uid']
+        user.password = Devise.friendly_token[6, 20]
+      end
+    end
   end
 
   private
