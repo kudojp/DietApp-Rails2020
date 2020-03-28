@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
+<<<<<<< HEAD
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'devise/registrations' }
+=======
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+>>>>>>> Use social login by facebook account
 
   root to: 'home#index'
 
