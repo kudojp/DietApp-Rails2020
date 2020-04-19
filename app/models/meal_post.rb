@@ -11,6 +11,7 @@ class MealPost < ApplicationRecord
   validates :content, presence: true, length: { maximum: 200 }
 
   def score
+    # TODO: 負荷が高いのでバッチ処理化 or SQLの集計関数を使う
     votes.all.map { |v| v.is_upvote? ? 1 : -1 }.sum
   end
 
