@@ -2,6 +2,8 @@ class MealPost < ApplicationRecord
   belongs_to :user
   has_many :votes, dependent: :destroy
   default_scope { order(time: :desc) }
+  scope :is_upvoted, -> { where(is_upvote: true) }
+  scope :is_downvoted, -> { where(is_upvote: false) }
 
   before_validation :strip_whitespaces, only: %i[content]
   validates :user_id, presence: true
