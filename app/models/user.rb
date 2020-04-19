@@ -42,7 +42,7 @@ class User < ApplicationRecord
   #     true (when given meal_post is already up(down)voted by current user)
   #     false (when given meal_post is not up(down)voted by current user yet)
   def voted?(is_upvote, meal_post)
-    !Vote.where(user: self, meal_post: meal_post, is_upvote: is_upvote).empty?
+    votes.where(meal_post: meal_post, is_upvote: is_upvote).exists?
   end
 
   # returns
@@ -51,12 +51,11 @@ class User < ApplicationRecord
   def change_vote_state(pushed_upvote, meal_post)
     # If already voted in the same direction...
     if voted?(pushed_upvote, meal_post)
-      Vote.where(user: self, meal_post: meal_post, is_upvote: pushed_upvote).destroy_all
+      votes.where(meal_post: meal_post, is_upvote: pushed_upvote).destroy_all
       return
     end
-
-    Vote.where(user: self, meal_post: meal_post).destroy_all
-    Vote.create!(user: self, meal_post: meal_post, is_upvote: pushed_upvote)
+    votes.where(meal_post: meal_post).destroy_all
+    votes.create!(meal_post: meal_post, is_upvote: pushed_upvote)
   end
 
   private
