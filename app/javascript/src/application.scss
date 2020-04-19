@@ -1,1 +1,15 @@
 @import '~bootstrap/scss/bootstrap';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+.upvote,
+.downvote {
+  &.active {
+    color: #ff0000;
+  }
+
+  // TODO: 自分のmealpostでhoverしている時はpointer表示しない
+  &:hover {
+    color: #ff0000;
+    cursor: pointer;
+  }
+}

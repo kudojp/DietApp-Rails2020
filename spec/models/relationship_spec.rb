@@ -28,5 +28,11 @@ RSpec.describe Relationship, type: :model do
       another_rel.valid?
       expect(another_rel.errors[:follower_id]).to include('has already been taken')
     end
+
+    it 'is invalid to follow self account' do
+      rel.followed = rel.follower
+      rel.save
+      expect(rel.errors[:relationship]).to include('cannot follow self account')
+    end
   end
 end

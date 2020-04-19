@@ -13,7 +13,8 @@ class User < ApplicationRecord
 
   has_many :followings, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
-  has_many :meal_posts
+  has_many :meal_posts, dependent: :destroy
+  has_many :votes, dependent: :destroy
 
   before_validation :strip_whitespaces, only: %i[name account_id]
   validates :name, presence: true, length: { in: 1..20 }
@@ -35,6 +36,26 @@ class User < ApplicationRecord
   def meal_posts_feed
     following_users_and_self = followings + [self]
     MealPost.where(user: following_users_and_self)
+  end
+
+  # returns
+  #     true (when given meal_post is already up(down)voted by current user)
+  #     false (when given meal_post is not up(down)voted by current user yet)
+  def voted?(is_upvote, meal_post)
+    votes.where(meal_post: meal_post, is_upvote: is_upvote).exists?
+  end
+
+  # returns
+  #     Vote object (when vote is successfully updated)
+  #     nil (when vote from curent user to given vote in the same direction already exists)
+  def change_vote_state(pushed_upvote, meal_post)
+    # If already voted in the same direction...
+    if voted?(pushed_upvote, meal_post)
+      votes.where(meal_post: meal_post, is_upvote: pushed_upvote).destroy_all
+      return
+    end
+    votes.where(meal_post: meal_post).destroy_all
+    votes.create!(meal_post: meal_post, is_upvote: pushed_upvote)
   end
 
   private

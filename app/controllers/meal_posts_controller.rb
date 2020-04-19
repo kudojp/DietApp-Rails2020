@@ -38,6 +38,16 @@ class MealPostsController < ApplicationController
     @meal_post = MealPost.find(params[:id])
   end
 
+  def upvoted_index
+    meal_posts = current_user.votes.is_upvoted.map(&:meal_post)
+    render template: 'meal_posts/index', locals: { title: 'MealPost Upvoted by you', meal_posts: meal_posts }
+  end
+
+  def downvoted_index
+    meal_posts = current_user.votes.is_downvoted.map(&:meal_post)
+    render template: 'meal_posts/index', locals: { title: 'MealPost Downvoted by you', meal_posts: meal_posts }
+  end
+
   private
 
   def meal_post_params

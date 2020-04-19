@@ -1,0 +1,5 @@
+<div class="vote" data-mealpost-id="<%= meal_post.id %>">
+  <div class="fa fa-arrow-up upvote<%= current_user.voted?(true, meal_post) ? ' active' : '' %>"></div>
+  <div class="font-weight-bold score"><%= meal_post.score %></div>
+  <div class="fa fa-arrow-down downvote<%= current_user.voted?(false, meal_post) ? ' active' : '' %>"></div>
+</div>

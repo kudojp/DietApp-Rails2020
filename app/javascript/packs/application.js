@@ -16,12 +16,15 @@ require("jquery");
 // const imagePath = (name) => images(name, true)
 
 import "bootstrap";
+import '@fortawesome/fontawesome-free/js/all'
 import "../src/application.scss";
 
 import "flatpickr/dist/flatpickr.css";
 import flatpickr from "flatpickr";
 
-$(document).ready(function() {
+require("../includes/vote.js")
+
+$(document).ready(function () {
   flatpickr(".datetimepicker", {
     altInput: true,
     enableTime: true,

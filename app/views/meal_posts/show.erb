@@ -1,5 +1,11 @@
-A page for 1 meal post
 
-<h1><%= @meal_post.content %></h1>
-<%= @meal_post.time %>
-<%= link_to @meal_post.user.name, user_path(@meal_post.user) %>
+<div class="row">
+  <div class="col-1">
+    <%= render partial: 'votes/vote', locals: { meal_post: @meal_post } %>
+  </div>
+  <div class="col-11">
+    <%= link_to @meal_post.user.name, user_path(@meal_post.user) %>
+    <h1><%= @meal_post.content %></h1>
+    <%= @meal_post.time %>
+  </div>
+</div>

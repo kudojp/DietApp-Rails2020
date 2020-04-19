@@ -10,5 +10,4 @@
 <%= link_to "Followings", followings_user_path(@user) %>
 <%= link_to "Followers", followers_user_path(@user) %>
 
-<h2>Meal_Posts</h2>
-<%= render template: 'meal_posts/index', locals: {meal_posts: @meal_posts} %>
+<%= render template: 'meal_posts/index', locals: {title: 'Meal Posts', meal_posts: @meal_posts} %>
