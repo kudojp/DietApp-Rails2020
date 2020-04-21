@@ -8,6 +8,8 @@
 
 https://diet-app-2020.herokuapp.com/users/sign_in
 
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
 ## 機能一覧
 
 - ユーザー登録・ログイン機能（devise を使用）
