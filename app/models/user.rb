@@ -11,6 +11,8 @@ class User < ApplicationRecord
                                    foreign_key: 'followed_id',
                                    dependent: :destroy
 
+  attr_accessor :is_registrable_without_password
+
   has_many :followings, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :meal_posts, dependent: :destroy
@@ -63,6 +65,10 @@ class User < ApplicationRecord
     votes.create!(meal_post: meal_post, is_upvote: pushed_upvote)
   end
 
+  # Argument:
+  #    auth: provider, uidの2つのキーを持つhash
+  # Returns:
+  #    該当するUserオブジェクト, なければnil
   def self.find_from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first
   end
@@ -82,5 +88,16 @@ class User < ApplicationRecord
   def strip_whitespaces
     name&.strip!
     account_id&.strip!
+  end
+
+  # なぜprotectedか理解していない....
+  protected
+
+  # defaultは !persisted? || !password.nil? || !password_confirmation.nil?
+  # つまりpasswordがnilであればpassword認証はcheckされると考えて良い
+  # facebook認証の時など、@authがnilではなく、かつpasswordがnilではない時には
+  # skipできるようにする
+  def password_required?
+    (!is_registrable_without_password && !persisted?) || !password.nil? || !password_confirmation.nil?
   end
 end

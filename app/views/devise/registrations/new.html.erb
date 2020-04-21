@@ -28,7 +28,7 @@
             <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
           </div>
           <%= f.text_field :email, class: "form-control", placeholder: "Email address", type: "email" %>
-        </div> <!-- form-group// -->
+        </div> <!-- form-email// -->
 
         <div class="form-group input-group">
           <div>1-20 alphanumeric characters besides surrounding blank spaces</div>
@@ -36,25 +36,25 @@
             <span class="input-group-text"> <i class="fa fa-user"></i> </span>
           </div>
           <%= f.text_field :name, class: "form-control", placeholder: "Full name", type: "text" %>
-        </div> <!-- form-email_id// -->
+        </div> <!-- form-name// -->
 
         <div class="form-group input-group">
           <div class="input-group-prepend">
             <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
           </div>
           <%= f.password_field :password, class: "form-control", placeholder: "Create password", type: "password"%>
-        </div> <!-- form-group// -->
+        </div> <!-- form-password// -->
 
         <div class="form-group input-group">
           <div class="input-group-prepend">
             <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
           </div>
           <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Repeat password", type: "password"%>
-        </div> <!-- form-group// -->
+        </div> <!-- form-password// -->
 
         <div class="form-group">
           <button type="submit" class="btn btn-primary btn-block"> Create Account </button>
-        </div> <!-- form-group// -->
+        </div> <!-- form-submit// -->
       <% end %>
       <p class="text-center">Have an account? <%= link_to "Log in", new_session_path(resource_name) %><br /> </p>
     </article>
