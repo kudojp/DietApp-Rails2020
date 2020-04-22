@@ -19,9 +19,11 @@ https://diet-app-2020.herokuapp.com/users/sign_in
 - 食事ポストの投稿削除機能 (Ajax を使用)
 - ポストへの投票(↑/↓)機能の追加
 - 自分がフォローしているユーザの投稿一覧表示機能
+- Facebook認証でのサインイン、ログイン機能
 
 ## TODOs
 
+- Google認証でのサインイン、ログイン機能
 - フォロワー/フォロイング数の表示
 - プロフィールに画像を追加
 - ポストへのコメント機能の追加
@@ -33,7 +35,7 @@ https://diet-app-2020.herokuapp.com/users/sign_in
 
 ## 使用技術
 
-- Ruby 2.6.3
+- Ruby 2.7.0
 - Rails 6.0.2
 - RSpec
 - Heroku
