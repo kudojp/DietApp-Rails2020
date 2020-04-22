@@ -5,6 +5,14 @@
   <div class="card bg-light">
     <article class="card-body mx-auto" style="max-width: 400px;">
       <h4 class="card-title mt-3 text-center">Log In Now</h4>
+      <p>
+        <%= link_to omniauth_authorize_path(resource_name, 'facebook'), class: "btn btn-block btn-facebook" do %>
+        <i class="fab fa-facebook-f"></i>   Sign in via facebook
+        <% end %>
+      </p>
+      <p class="divider-text">
+        <span class="bg-light">OR</span>
+      </p>
 
       <div class="form-group">
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -20,7 +28,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
             </div>
-            <%= f.password_field :password, class: "form-control", placeholder: "Create password", type: "password"%>
+            <%= f.password_field :password, class: "form-control", placeholder: "Your password", type: "password"%>
           </div> <!-- form-group// -->
 
           <% if devise_mapping.rememberable? %>
