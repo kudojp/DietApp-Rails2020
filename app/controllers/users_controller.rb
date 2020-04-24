@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def edit_profile
-    # TODO
+    @user = current_user
   end
 
   def edit_password
@@ -20,7 +20,12 @@ class UsersController < ApplicationController
   end
 
   def update_profile
-    # TODO
+    @user = current_user
+    is_updated = @user.update(user_profile_params)
+
+    return redirect_to profile_edit_path if is_updated
+
+    render 'users/edit_profile'
   end
 
   def update_password
@@ -61,8 +66,9 @@ class UsersController < ApplicationController
     render 'users/index'
   end
 
-  def show
-    @user = User.find(params[:id])
-    @meal_posts = @user&.meal_posts # &.includes(:user)
+  private
+
+  def user_profile_params
+    params.require(:user).permit(:name, :is_male, :height, :weight, :comment)
   end
 end
