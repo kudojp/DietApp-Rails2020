@@ -6,6 +6,35 @@ class UsersController < ApplicationController
     @title = 'All Users'
   end
 
+  def show
+    @user = User.find(params[:id])
+    @meal_posts = @user&.meal_posts # &.includes(:user)
+  end
+
+  def edit_profile
+    # TODO
+  end
+
+  def edit_password
+    # TODO
+  end
+
+  def update_profile
+    # TODO
+  end
+
+  def update_password
+    # TODO
+  end
+
+  def destroy_confirmation
+    # TODO
+  end
+
+  def destroy
+    # TODO
+  end
+
   def followings_index
     @users = User.find(params[:id]).followings
     @title = 'Followings'
