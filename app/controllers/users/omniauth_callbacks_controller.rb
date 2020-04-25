@@ -9,10 +9,10 @@ module Users
         set_flash_message(:notice, :success, kind: 'Facebook') if is_navigational_format?
       else
         facebook_data = request.env['omniauth.auth']
-        session['devise.facebook'] = facebook_data
+                               .tap { |fd| session['devise.facebook'] = fd }
         @f_user = User.new
-        @f_user.email = facebook_data['extra']['raw_info'].email
-        @f_user.name = facebook_data['extra']['raw_info'].name
+                      .tap { |u| u.email = facebook_data['extra']['raw_info'].email }
+                      .tap { |u| u.name = facebook_data['extra']['raw_info'].name }
         render 'devise/registrations/new_after_facebook_auth'
       end
     end
