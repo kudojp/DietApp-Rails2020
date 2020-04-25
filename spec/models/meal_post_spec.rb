@@ -74,4 +74,24 @@ RSpec.describe MealPost, type: :model do
       expect(meal_post.score).to be(0)
     end
   end
+
+  describe 'has_many :[up|down]voters association' do
+    it 'returns (un)favorite meal posts properly' do
+      friend1 = create(:user)
+      friend2 = create(:user)
+      trainer1 = create(:user)
+      trainer2 = create(:user)
+
+      upvote1 = Vote.create(user: friend1, meal_post: meal_post, is_upvote: true)
+      upvote2 = Vote.create(user: friend2, meal_post: meal_post, is_upvote: true)
+      downvote1 = Vote.create(user: trainer1, meal_post: meal_post, is_upvote: false)
+      downvote2 = Vote.create(user: trainer2, meal_post: meal_post, is_upvote: false)
+
+      expect(meal_post.upvotes).to match_array([upvote1, upvote2])
+      expect(meal_post.upvoters).to match_array([friend1, friend2])
+
+      expect(meal_post.downvotes).to match_array([downvote1, downvote2])
+      expect(meal_post.downvoters).to match_array([trainer1, trainer2])
+    end
+  end
 end
