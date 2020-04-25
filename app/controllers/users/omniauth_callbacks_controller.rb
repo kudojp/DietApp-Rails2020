@@ -6,7 +6,7 @@ module Users
 
       if @f_user
         sign_in_and_redirect @f_user
-        set_flash_message(:noteice, :success, kind: 'Facebook') if is_navigational_format?
+        set_flash_message(:notice, :success, kind: 'Facebook') if is_navigational_format?
       else
         facebook_data = request.env['omniauth.auth']
         session['devise.facebook'] = facebook_data
