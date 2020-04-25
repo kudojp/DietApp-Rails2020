@@ -16,6 +16,11 @@ class User < ApplicationRecord
   has_many :meal_posts, dependent: :destroy
   has_many :votes, dependent: :destroy
 
+  has_many :upvotes, -> { where(is_upvote: true) }, class_name: 'Vote'
+  has_many :downvotes, -> { where(is_upvote: false) }, class_name: 'Vote'
+  has_many :favorite_meal_posts, through: :upvotes, source: :meal_post
+  has_many :unfavorite_meal_posts, through: :downvotes, source: :meal_post
+
   before_validation :strip_whitespaces, only: %i[name account_id]
   validates :name, presence: true, length: { in: 1..20 }
   validates :account_id, presence: true, length: { in: 5..15 }, uniqueness: true,
