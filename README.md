@@ -41,3 +41,10 @@ https://diet-app-2020.herokuapp.com/users/sign_in
 
 - Rspec
   - 単体テスト（モデル）
+
+## ローカル環境での機動方法
+
+```
+pg_ctl -D /usr/local/var/postgres start
+bundle exec rails s
+```
