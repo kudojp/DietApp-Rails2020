@@ -12,10 +12,13 @@
 
 ActiveRecord::Schema.define(version: 2020_03_19_191628) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "meal_posts", force: :cascade do |t|
     t.text "content"
     t.datetime "time"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_meal_posts_on_user_id"
@@ -51,8 +54,8 @@ ActiveRecord::Schema.define(version: 2020_03_19_191628) do
   end
 
   create_table "votes", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "meal_post_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "meal_post_id", null: false
     t.boolean "is_upvote", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
