@@ -39,12 +39,13 @@ class MealPostsController < ApplicationController
   end
 
   def upvoted_index
-    meal_posts = current_user.votes.is_upvoted.map(&:meal_post)
+    # meal_posts = User.find(params[:id]).votes.includes(:meal_post).filter(&:is_upvote).map(&:meal_post)
+    meal_posts = User.find(params[:id]).favorite_meal_posts.includes(:votes)
     render template: 'meal_posts/index', locals: { title: 'MealPost Upvoted by you', meal_posts: meal_posts }
   end
 
   def downvoted_index
-    meal_posts = current_user.votes.is_downvoted.map(&:meal_post)
+    meal_posts = User.find(params[:id]).unfavorite_meal_posts.includes(:user)
     render template: 'meal_posts/index', locals: { title: 'MealPost Downvoted by you', meal_posts: meal_posts }
   end
 

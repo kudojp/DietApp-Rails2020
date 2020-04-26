@@ -18,9 +18,22 @@ class UsersController < ApplicationController
     render 'users/index'
   end
 
+  def upvoters_index
+    @users = MealPost.find(params[:meal_post_id]).upvoters
+    @title = 'この頑張りを見てくれてる人達'
+    # TODO: viewでどのMealPostに対するvotesかが表示したい
+    render 'users/index'
+  end
+
+  def downvoters_index
+    @users = MealPost.find(params[:meal_post_id]).downvoters
+    @title = 'この誘惑に負けた姿を見て嘆いてる人達'
+    # TODO: viewでどのMealPostに対するvotesかが表示したい
+    render 'users/index'
+  end
+
   def show
     @user = User.find(params[:id])
-
     @meal_posts = @user&.meal_posts # &.includes(:user)
   end
 end

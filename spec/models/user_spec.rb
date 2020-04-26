@@ -254,4 +254,24 @@ RSpec.describe User, type: :model do
       expect(returned_vote).to be_nil
     end
   end
+
+  describe 'has_many :(un)favorite meal_posts association' do
+    it 'returns (un)favorite meal posts properly' do
+      good_mp1 = create(:meal_post)
+      good_mp2 = create(:meal_post)
+      bad_mp1 = create(:meal_post)
+      bad_mp2 = create(:meal_post)
+
+      upvote1 = Vote.create(user: user, meal_post: good_mp1, is_upvote: true)
+      upvote2 = Vote.create(user: user, meal_post: good_mp2, is_upvote: true)
+      downvote1 = Vote.create(user: user, meal_post: bad_mp1, is_upvote: false)
+      downvote2 = Vote.create(user: user, meal_post: bad_mp2, is_upvote: false)
+
+      expect(user.upvotes).to match_array([upvote1, upvote2])
+      expect(user.favorite_meal_posts).to match_array([good_mp1, good_mp2])
+
+      expect(user.unfavorite_meal_posts).to match_array([bad_mp1, bad_mp2])
+      expect(user.downvotes).to match_array([downvote1, downvote2])
+    end
+  end
 end

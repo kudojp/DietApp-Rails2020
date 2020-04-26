@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   resources :meal_posts, only: %i[create destroy show] do
     patch :upvote, to: 'votes#upvote'
     patch :downvote, to: 'votes#downvote'
+    get :upvoters, to: 'users#upvoters_index'
+    get :downvoters, to: 'users#downvoters_index'
   end
   resources :votes, only: %i[create destroy]
 end

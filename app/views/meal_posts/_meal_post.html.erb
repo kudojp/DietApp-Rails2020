@@ -10,12 +10,18 @@
     </div>
 
     <div class="col-10">
-      <p><%= link_to meal_post.content, meal_post_path(meal_post) %></p>
-      <p class="small"><%= meal_post.time %></p>
-      <% if current_user == meal_post.user %>
-        <%= link_to "Delete this post", meal_post_path(meal_post),
-        method: "delete", remote: true %>
-      <% end %>
+      <div><%= link_to meal_post.content, meal_post_path(meal_post) %></div>
+      <div class="small"><%= meal_post.time %></div>
+      <div>
+        <%= link_to '評価してる人', meal_post_upvoters_path(meal_post) %>
+        <%= link_to '呆れてる人', meal_post_downvoters_path(meal_post) %>
+      </div>
+      <div>
+        <% if current_user == meal_post.user %>
+          <%= link_to "Delete this post", meal_post_path(meal_post),
+          method: "delete", remote: true %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
