@@ -17,6 +17,7 @@ class MealPost < ApplicationRecord
   validates :user_id, presence: true
   validates :time, presence: true
   validates :content, presence: true, length: { maximum: 200 }
+  validates :food_items, length: { minimum: 1, message: 'should have at least 1 food item.' }
 
   def score
     # TODO: 負荷が高いのでバッチ処理化 or SQLの集計関数を使う
@@ -28,4 +29,6 @@ class MealPost < ApplicationRecord
   def strip_whitespaces
     content&.strip!
   end
+
+  def has_at_least_1_food_item; end
 end
