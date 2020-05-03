@@ -3,8 +3,8 @@ class FoodItem < ApplicationRecord
 
   before_validation :strip_whitespaces
   validates :name, presence: true, length: { maximum: 50 }
-  validates :amount, length: { maximum: 30 }
-  validates :calory, numericality: { only_integer: true, greater_than: 0 }
+  validates :amount, length: { maximum: 30 }, allow_blank: true
+  validates :calory, numericality: { only_integer: true, greater_than: 0 }, allow_blank: true
 
   private
 
