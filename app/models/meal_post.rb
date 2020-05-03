@@ -2,7 +2,7 @@ class MealPost < ApplicationRecord
   belongs_to :user
   has_many :votes, dependent: :destroy
   has_many :food_items, dependent: :destroy
-  accepts_nested_attributes_for :food_items, reject_if: proc { |attr| attr['name'].blank? && attr['amount'].blank? && attr['calory'].blank? }
+  accepts_nested_attributes_for :food_items, reject_if: proc { |attr| attr['name'].blank? && attr['amount'].blank? && attr['calory'].blank? }, allow_destroy: true
 
   has_many :upvotes, -> { where(is_upvote: true) }, class_name: 'Vote'
   has_many :downvotes, -> { where(is_upvote: false) }, class_name: 'Vote'
@@ -29,6 +29,4 @@ class MealPost < ApplicationRecord
   def strip_whitespaces
     content&.strip!
   end
-
-  def has_at_least_1_food_item; end
 end
