@@ -4,6 +4,10 @@ class MealPostsController < ApplicationController
   def create
     @new_meal_post = current_user.meal_posts.build(meal_post_params)
 
+    # meal_post object used for rendering partial form after successfully creating meal_post
+    @next_meal_post = current_user.meal_posts.new
+    3.times { @next_meal_post&.food_items&.build }
+
     if @new_meal_post.save
       return respond_to do |format|
         # TODO: friendly forwardingを実装
@@ -52,6 +56,6 @@ class MealPostsController < ApplicationController
   private
 
   def meal_post_params
-    params.require(:meal_post).permit(:content, :time)
+    params.require(:meal_post).permit(:content, :time, food_items_attributes: %i[name amount calory _destroy])
   end
 end

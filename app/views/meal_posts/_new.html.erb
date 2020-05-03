@@ -1,9 +1,19 @@
 <!-- partial for posting new meal -->
 
-<%= form_for @new_meal_post, remote: true do |f| %>
+<%= form_for new_meal_post, remote: true do |f| %>
   <div class="field">
     <%= f.label :content %><br />
     <%= f.text_field :content %>
+  </div>
+
+  <div class="fields">
+    <!-- TODO: FoodItemのフォームをinlineにする -->
+    <%= f.fields_for :food_items do |fi_field| %>
+      <%= render partial: 'meal_posts/food_item_fields', locals: {f: fi_field} %>
+    <% end %>
+    <div class='links'>
+      <%= link_to_add_association '食品を追加', f, :food_items, partial: 'meal_posts/food_item_fields' %>
+    </div>
   </div>
 
   <div class="field">

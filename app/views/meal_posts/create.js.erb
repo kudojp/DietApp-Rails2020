@@ -1,3 +1,10 @@
 console.log("post successfully created");
-// TODO: prependではなくtimeの順番にしたがってしかるべきところに挿入する
+<%# TODO: prependではなくtimeの順番にしたがってしかるべきところに挿入する %>
 $(".meal-posts").find(".card").first().prepend("<%= escape_javascript(render(partial: 'meal_posts/meal_post', locals: {meal_post: @new_meal_post})) %>");
+$(".new_meal_post").replaceWith('<%= escape_javascript(render(partial: 'meal_posts/new', locals: {new_meal_post: @next_meal_post})) %>');
+flatpickr(".datetimepicker", {
+    altInput: true,
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+    inline: true
+});

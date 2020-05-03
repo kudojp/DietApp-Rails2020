@@ -12,7 +12,7 @@
     <%= render template: 'meal_posts/index', locals: {title: 'Your Timeline', meal_posts: meal_posts} %>
   </div>
 
-  <div class='col-4'>
-    <%= render partial: 'meal_posts/new'%>
+  <div class='col-4 mealpost-new'>
+    <%= render partial: 'meal_posts/new', locals: {new_meal_post: @new_meal_post} %>
   </div>
 </div>
