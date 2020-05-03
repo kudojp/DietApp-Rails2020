@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     get 'users/cancel', to: 'devise/registrations#cancel', as: :cancel_user_registration
     get '/users/sign_up', to: 'devise/registrations#new', as: :new_user_registration
     delete '/users', to: 'devise/registrations#destroy', as: :user_registration
-    post '/users', to: 'devise/registration#create'
+    post '/users', to: 'devise/registrations#create'
   end
 
   resources :users, only: %i[show index] do
