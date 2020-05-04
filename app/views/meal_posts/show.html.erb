@@ -1,5 +1,33 @@
 <h2>このMealPostの詳細</h2>
 
 <%= render partial: 'meal_post', locals: {meal_post: @meal_post} %>
+<br>
+<br>
 
-<!-- #TODO: ここにコメントなり、投票者のリスト入れるなりする -->
+<div class="row">
+  <div class="col-8">
+    <table border="2">
+      <tr>
+        <th>食品名</th>
+        <th>食べた量</th>
+        <th>カロリー</th>
+      </tr>
+      <% @meal_post.food_items.each do |fi| %>
+        <tr>
+          <td><%= fi[:name] %></td>
+          <td><%= fi[:amount] %></td>
+          <td><%= fi[:calory] %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div class="col-4">
+    <h4>
+      総カロリー
+    </h4>
+    <h1>
+      <%= total_calories_of(@meal_post) %>
+    <h1>
+  </div>
+</div>
