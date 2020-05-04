@@ -16,8 +16,8 @@
       </div>
       <div class="small"><%= meal_post.time %></div>
       <div>
-        <%= link_to '高評価', meal_post_upvoters_path(meal_post) %>
-        <%= link_to '低評価', meal_post_downvoters_path(meal_post) %>
+        <%= link_to '高評価した人', meal_post_upvoters_path(meal_post) %>
+        <%= link_to '低評価した人', meal_post_downvoters_path(meal_post) %>
       </div>
       <div>
         <% if current_user == meal_post.user %>
