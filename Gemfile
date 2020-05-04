@@ -36,6 +36,7 @@ gem 'devise'
 gem 'omniauth-facebook'
 gem 'dotenv-rails'
 gem 'cocoon'
+gem 'counter_culture'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
