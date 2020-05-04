@@ -1,6 +1,3 @@
-<!-- partial for posting new meal -->
-
-<h3>食べたものを記録</h3>
 <%= form_for new_meal_post, remote: true do |f| %>
   <div class="field">
     <%= f.text_field :content, placeholder: 'メニュー名' %>
