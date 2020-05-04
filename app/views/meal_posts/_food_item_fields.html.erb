@@ -1,6 +1,6 @@
 <div class='nested-fields'>
-  <%= f.text_field :name, placeholder: '品目' %>
-  <%= f.text_field :amount , placeholder: '分量'%>
-  <%= f.number_field :calory, placeholder: 'カロリー' %>
-  <%= link_to_remove_association 'この品目を削除', f %>
+  <%= f.text_field :name, placeholder: '品目', class: 'fi_field' %>
+  <%= f.text_field :amount , placeholder: '分量', class: 'fi_field' %>
+  <%= f.number_field :calory, placeholder: 'カロリー', class: 'fi_field' %>
+  <%= link_to_remove_association '', f, class: "fas fa-times-circle" %>
 </div>
