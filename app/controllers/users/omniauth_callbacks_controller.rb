@@ -10,9 +10,11 @@ module Users
       else
         facebook_data = request.env['omniauth.auth']
                                .tap { |fd| session['devise.facebook'] = fd }
-        @f_user = User.new
-                      .tap { |u| u.email = facebook_data['extra']['raw_info'].email }
-                      .tap { |u| u.name = facebook_data['extra']['raw_info'].name }
+        @f_user = User.new.tap do |u|
+          u.email = facebook_data['extra']['raw_info'].email
+          u.name = facebook_data['extra']['raw_info'].name
+        end
+
         render 'devise/registrations/new_after_facebook_auth'
       end
     end
