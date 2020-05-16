@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[facebook]
 
   has_many :active_relationships, class_name: 'Relationship',
                                   foreign_key: 'follower_id',
@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :passive_relationships, class_name: 'Relationship',
                                    foreign_key: 'followed_id',
                                    dependent: :destroy
+
+  attr_accessor :is_registrable_without_password
 
   has_many :followings, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
@@ -63,10 +65,39 @@ class User < ApplicationRecord
     votes.create!(meal_post: meal_post, is_upvote: pushed_upvote)
   end
 
+  # Argument:
+  #    auth: provider, uidの2つのキーを持つhash
+  # Returns:
+  #    該当するUserオブジェクト, なければnil
+  def self.find_from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if (session_data = session['devise.facebook'])
+        user.provider = session_data['provider']
+        user.uid = session_data['uid']
+        user.password = Devise.friendly_token[6, 20]
+      end
+    end
+  end
+
   private
 
   def strip_whitespaces
     name&.strip!
     account_id&.strip!
+  end
+
+  # なぜprotectedか理解していない....
+  protected
+
+  # defaultは !persisted? || !password.nil? || !password_confirmation.nil?
+  # つまりpasswordがnilであればpassword認証はcheckされると考えて良い
+  # facebook認証の時など、@authがnilではなく、かつpasswordがnilではない時には
+  # skipできるようにする
+  def password_required?
+    (!is_registrable_without_password && !persisted?) || !password.nil? || !password_confirmation.nil?
   end
 end

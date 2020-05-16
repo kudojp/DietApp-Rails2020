@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'devise/registrations' }
 
   root to: 'home#index'
+
+  get 'users/facebook_auth/sign_up', to: 'users/facebook_users#new', as: :new_facebook_user_registration
+  post 'facebook_users', to: 'users/facebook_users#create'
 
   resources :users, only: %i[show index] do
     member do
