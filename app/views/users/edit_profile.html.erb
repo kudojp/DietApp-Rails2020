@@ -1,6 +1,6 @@
 <h2>Edit profile</h2>
 
-<%# methodはputとpostかどっちでもいける %>
+<%# methodはputとpatchどっちでもいける %>
 <%= form_for(@user, url: profile_path, html: { method: :post }) do |f| %>
   <%= render "devise/shared/error_messages", resource: @user %>
 
