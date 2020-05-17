@@ -1,0 +1,8 @@
+console.log('You could not edit your meal post.');
+$(".edit_meal_post").replaceWith('<%= escape_javascript(render partial: 'meal_posts/edit', locals: {meal_post: @meal_post}) %>')
+flatpickr(".datetimepicker", {
+    altInput: true,
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+    inline: true
+});

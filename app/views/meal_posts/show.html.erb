@@ -4,25 +4,9 @@
 <br>
 <br>
 
-<div class="row">
-  <div class="col-8">
-    <table border="2">
-      <tr>
-        <th>食品名</th>
-        <th>食べた量</th>
-        <th>カロリー</th>
-      </tr>
-      <% @meal_post.food_items.each do |fi| %>
-        <tr>
-          <td><%= fi[:name] %></td>
-          <td><%= fi[:amount] %></td>
-          <td><%= fi[:calory] %></td>
-        </tr>
-      <% end %>
-    </table>
-  </div>
 
-  <div class="col-4">
+<div class="row">
+  <div class="col-6">
     <h4>
       総カロリー
     </h4>
@@ -30,4 +14,12 @@
       <%= total_calories_of(@meal_post) %>
     <h1>
   </div>
+
+  <div class="col-6">
+    <%= render partial: 'meal_posts/new', locals: {new_meal_post: @meal_post} %>
+  </div>
+
+
+
+
 </div>

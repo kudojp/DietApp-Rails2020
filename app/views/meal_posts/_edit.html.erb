@@ -1,0 +1,32 @@
+<div class='edit_meal_post'>
+  <% if meal_post.errors.any? %>
+    <div class="meal_post_errors">
+      <% meal_post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </div><br>
+  <% end %>
+
+  <%= form_for(meal_post, html: { method: :patch }, remote: true) do |f| %>
+    <div class="field">
+      <%= f.text_field :content, placeholder: 'メニュー名' %>
+    </div><br>
+
+    <div class="fields">
+      <%= f.fields_for :food_items do |fi_field| %>
+        <%= render partial: 'meal_posts/food_item_fields', locals: {f: fi_field} %>
+      <% end %>
+      <div class='links'>
+        <%= link_to_add_association '', f, :food_items, partial: 'meal_posts/food_item_fields', class: "fas fa-plus-circle" %>
+      </div>
+    </div><br>
+
+    <div class="field">
+      <%= f.text_field :time, class: 'datetimepicker', placeholder: '食べた日時を選択' %>
+    </div>
+
+    <!-- TODO: 画像もアップロードできるようにする -->
+
+    <%= f.submit "投稿する" %>
+  <% end %>
+</div>
