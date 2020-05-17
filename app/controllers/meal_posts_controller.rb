@@ -21,7 +21,7 @@ class MealPostsController < ApplicationController
       # TODO: errorを伝搬するなりして、alertをもう少しdescriptiveにする
       format.html { redirect_to root, alert: 'You could not make a meal post.' }
       format.js do
-        render partial: 'meal_posts/create_failure', status: :bad_request
+        render 'meal_posts/create_failure', status: :bad_request
       end
     end
   end
