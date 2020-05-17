@@ -13,9 +13,11 @@
           </a>
 
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <%= link_to "Profile", user_path(current_user.id), class: "dropdown-item" %>
-            <%= link_to "Settings", edit_user_registration_path, class: "dropdown-item" %>
-            <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            <%= link_to "Profile", user_path(current_user), class: "dropdown-item" %>
+            <%= link_to "Edit Profile", profile_edit_path, class: "dropdown-item" %>
+            <%= link_to "Edit Password", password_edit_path, class: "dropdown-item" %>
+            <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item", data: { confirm: '本当にログアウトしますか？' } %>
+            <%= link_to "Cancel Account", cancellation_confirmation_path, class: "dropdown-item" %>
           </div>
         </div>
       <% else %>

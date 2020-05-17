@@ -17,7 +17,7 @@ require("jquery");
 
 import "bootstrap";
 import '@fortawesome/fontawesome-free/js/all'
-import "../src/application.scss";
+import "../stylesheets/application.scss";
 
 import "flatpickr/dist/flatpickr.css";
 import flatpickr from "flatpickr";
