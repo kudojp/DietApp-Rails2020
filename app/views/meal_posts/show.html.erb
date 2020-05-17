@@ -7,12 +7,7 @@
 
 <div class="row">
   <div class="col-6">
-    <h4>
-      総カロリー
-    </h4>
-    <h1>
-      <%= total_calories_of(@meal_post) %>
-    <h1>
+    <%= render partial: 'total_calories', locals: {meal_post: @meal_post}%>
   </div>
 
   <div class="col-6">

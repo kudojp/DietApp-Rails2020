@@ -1,5 +1,6 @@
 console.log("post successfully updated");
-$(".edit_meal_post").replaceWith('<%= escape_javascript(render partial: 'meal_posts/edit', locals: {meal_post: @meal_post, meal_post_edit_message: 'You could successfully update your meal post'}) %>')
+$(".total_calories").replaceWith('<%= escape_javascript(render partial: 'meal_posts/total_calories', locals: {meal_post: @meal_post}) %>');
+$(".edit_meal_post").replaceWith('<%= escape_javascript(render partial: 'meal_posts/edit', locals: {meal_post: @meal_post}) %>')
 $("div.edit_meal_post").prepend('食事の投稿を更新できました<br><br>');
 flatpickr(".datetimepicker", {
     altInput: true,
