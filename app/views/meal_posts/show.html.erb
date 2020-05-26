@@ -10,9 +10,11 @@
     <%= render partial: 'total_calories', locals: {meal_post: @meal_post}%>
   </div>
 
-  <div class="col-6">
-    <%= render partial: 'meal_posts/new', locals: {new_meal_post: @meal_post} %>
-  </div>
+  <% if @is_own_meal_post %>
+    <div class="col-6">
+      <%= render partial: 'meal_posts/new', locals: {new_meal_post: @meal_post} %>
+    </div>
+  <% end %>
 
 
 
