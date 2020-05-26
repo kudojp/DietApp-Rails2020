@@ -1,4 +1,5 @@
 class MealPostsController < ApplicationController
+  include AjaxHelper
   before_action :authenticate_user!, only: %i[create destroy update]
 
   def create
@@ -28,7 +29,13 @@ class MealPostsController < ApplicationController
 
   def update
     @meal_post = MealPost.find(params[:id])
-    return redirect_to root_path, alert: 'You are not authorized to update the post' unless @meal_post.user_id == current_user.id
+    unless @meal_post.user_id == current_user.id
+      respond_to do |format|
+        format.html { redirect_to root_path, alert: 'You are not authorized to update the post' }
+        # (ajaxなど)js-acceptのリクエストでこれが叩かれることは基本ないだろうが、、、
+        format.js { render ajax_redirect_to(root_path) }
+      end
+    end
 
     is_updated = @meal_post.update(update_meal_post_params)
     # 以下の理由でreloadが必要である
