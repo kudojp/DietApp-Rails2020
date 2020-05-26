@@ -28,14 +28,14 @@ class MealPostsController < ApplicationController
 
   def update
     @meal_post = MealPost.find(params[:id])
-    return redirect_to root_path, alert: 'You are not authorized to update the post' if @meal_post.user_id == current_user
+    return redirect_to root_path, alert: 'You are not authorized to update the post' unless @meal_post.user_id == current_user.id
 
     is_updated = @meal_post.update(update_meal_post_params)
-    # 以下の理由でreloaadが必要である
+    # 以下の理由でreloadが必要である
     # (1)counter_cultureで更新される@meal_post.total_caloriesの値をモデルに反映するため
     # (2)@meal_post.food_itemsのそれぞれのmark_for_destructionをfalseに戻すため
     #    ここで設定しないと以下のようなバグが生じる
-    #    [バグ]food_itemsを全て消して投稿した後に、画面描写後再び投稿ボタンを押すと「Food items should have at least 1 food item.」をいうエラーが出る
+    #    [バグ]food_itemsを全て消して投稿した後に、画面描写後再び投稿ボタンを押すと「Food items should have at least 1 food item.」というエラーが出る
     @meal_post.reload
 
     if is_updated
