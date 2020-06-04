@@ -72,7 +72,7 @@ bundle exec rspec
 
 ### [# Voting(投票機能)の追加 #2](https://github.com/kudojp/diet-app/pull/2)
 
-- 使用設計は[ここ](https://github.com/kudojp/diet-app/pull/2#issue-392782081)
+- 仕様設計は[ここ](https://github.com/kudojp/diet-app/pull/2#issue-392782081)
 - Voting はいいね(+1)と悪いね(-1)の２種類があり、自分の投稿に投票できない
 - 各 MealPost の合計得点に関して時間がかかりすぎるので counter_culture を使うべきだった(後の FoodItem の実装以降導入)
 
@@ -105,7 +105,7 @@ bundle exec rspec
 - この PR 時点では、 Facecbook 認証では Facebook の認可サーバから取ってきた`provider`と`uid`に合致する列が users テーブルにが存在すれば認証完了、としていた。
 - この PR 時点では Facecbook 認証したユーザは password 設定ができない。故に profile や password 更新ができない。これらは以下の PR で直された。
 
-### [# Facebook 認証で登録した User が後からパスワードを設定できるようにする #8](https://github.com/kudojp/diet-app/pull/8](https://github.com/kudojp/diet-app/pull/8)
+### [# Facebook 認証で登録した User が後からパスワードを設定できるようにする #8](https://github.com/kudojp/diet-app/pull/8)
 
 - 上の PR の続き。仕様設計は[ここ](<[https://github.com/kudojp/diet-app/pull/8](https://github.com/kudojp/diet-app/pull/8)>)
 - やったことは主に 3 つ
