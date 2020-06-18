@@ -43,6 +43,14 @@ RSpec.describe MealPost, type: :model do
       m_post = build(:meal_post, user: user, content: 'a' * 200)
       expect(m_post).to be_valid
     end
+
+    it 'is invalid without any meal_post' do
+      m_post = build(:meal_post, user: user)
+      m_post.food_items = []
+      expect(m_post).not_to be_valid
+      expect(m_post.errors.size).to eq 1
+      expect(m_post.errors[:food_items]).to match_array ['should have at least 1 food item.']
+    end
   end
 
   describe 'List of meal_posts' do

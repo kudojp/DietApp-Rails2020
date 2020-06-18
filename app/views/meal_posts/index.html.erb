@@ -1,5 +1,5 @@
 <!-- #TODO: POSTがないときはNO POSTくらい表示 -->
-<h2><%= title %></h2>
+<h3><%= title %></h3>
 <div class="meal-posts">
   <% meal_posts&.each do |meal_post| %>
     <%= render partial: 'meal_posts/meal_post', locals: {meal_post: meal_post} %>

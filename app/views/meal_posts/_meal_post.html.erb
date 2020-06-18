@@ -3,22 +3,25 @@
     <%= link_to meal_post.user.name, user_path(meal_post.user) %>
   </div>
 
-   <div class="row">
-    <!-- TODO:Fontawesome, TODO: Vote arrow should be pushable only when it is not current user's post -->
+  <div class="row">
+    <!-- TODO:Fontawesome, TODO: Vote arrow should be displayed only when it is not current user's post -->
     <div class="col-2 text-center">
       <%= render partial: 'votes/vote', locals: { meal_post: meal_post } %>
     </div>
 
     <div class="col-10">
-      <div><%= link_to meal_post.content, meal_post_path(meal_post) %></div>
+      <div>
+        <%= link_to meal_post.content, meal_post_path(meal_post) %>
+        (<%= total_count_and_calories_of(meal_post) %>)
+      </div>
       <div class="small"><%= meal_post.time %></div>
       <div>
-        <%= link_to '評価してる人', meal_post_upvoters_path(meal_post) %>
-        <%= link_to '呆れてる人', meal_post_downvoters_path(meal_post) %>
+        <%= link_to '高評価した人', meal_post_upvoters_path(meal_post) %>
+        <%= link_to '低評価した人', meal_post_downvoters_path(meal_post) %>
       </div>
       <div>
         <% if current_user == meal_post.user %>
-          <%= link_to "Delete this post", meal_post_path(meal_post),
+          <%= link_to "投稿削除", meal_post_path(meal_post),
           method: "delete", remote: true %>
         <% end %>
       </div>

@@ -1,0 +1,5 @@
+console.log('You could not create your meal post.');
+$(".meal_post_errors").remove();
+errorMessages = '<div class="meal_post_errors"><% @new_meal_post.errors.full_messages.each do |message| %><li><%= message %></li><% end %></div><br>';
+$(".new_meal_post").prepend(errorMessages);
+

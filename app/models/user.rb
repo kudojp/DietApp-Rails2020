@@ -23,7 +23,7 @@ class User < ApplicationRecord
   has_many :favorite_meal_posts, through: :upvotes, source: :meal_post
   has_many :unfavorite_meal_posts, through: :downvotes, source: :meal_post
 
-  before_validation :strip_whitespaces, only: %i[name account_id]
+  before_validation :strip_whitespaces
   validates :name, presence: true, length: { in: 1..20 }
   validates :account_id, presence: true, length: { in: 5..15 }, uniqueness: true,
                          format: { with: /\A[A-Za-z0-9]+\z/, message: 'should be alphanumeric' }

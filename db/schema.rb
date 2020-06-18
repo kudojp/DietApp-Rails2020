@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_19_122131) do
+ActiveRecord::Schema.define(version: 2020_05_04_084917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "food_items", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "amount"
+    t.bigint "calory"
+    t.bigint "meal_post_id", null: false
+    t.index ["meal_post_id"], name: "index_food_items_on_meal_post_id"
+  end
 
   create_table "meal_posts", force: :cascade do |t|
     t.text "content"
@@ -21,6 +29,9 @@ ActiveRecord::Schema.define(version: 2020_04_19_122131) do
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "total_calories"
+    t.integer "food_items_count", default: 0, null: false
+    t.integer "food_items_with_calories_count", default: 0, null: false
     t.index ["user_id"], name: "index_meal_posts_on_user_id"
   end
 
@@ -66,6 +77,7 @@ ActiveRecord::Schema.define(version: 2020_04_19_122131) do
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
+  add_foreign_key "food_items", "meal_posts"
   add_foreign_key "meal_posts", "users"
   add_foreign_key "votes", "meal_posts"
   add_foreign_key "votes", "users"

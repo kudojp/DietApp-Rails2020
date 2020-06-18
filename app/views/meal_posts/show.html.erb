@@ -1,5 +1,22 @@
 <h2>このMealPostの詳細</h2>
 
 <%= render partial: 'meal_post', locals: {meal_post: @meal_post} %>
+<br>
+<br>
 
-<!-- #TODO: ここにコメントなり、投票者のリスト入れるなりする -->
+
+<div class="row">
+  <div class="col-6">
+    <%= render partial: 'total_calories', locals: {meal_post: @meal_post}%>
+  </div>
+
+  <% if @is_own_meal_post %>
+    <div class="col-6">
+      <%= render partial: 'meal_posts/new', locals: {new_meal_post: @meal_post} %>
+    </div>
+  <% end %>
+
+
+
+
+</div>

@@ -21,6 +21,7 @@ import "../stylesheets/application.scss";
 
 import "flatpickr/dist/flatpickr.css";
 import flatpickr from "flatpickr";
+import 'cocoon-js'
 
 require("../includes/vote.js")
 

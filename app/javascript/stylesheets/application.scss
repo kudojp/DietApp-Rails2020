@@ -1,7 +1,8 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
-@import './signup.scss';
-@import './destroy_confirmation.scss';
+@import './devise/signup.scss';
+@import './users/destroy_confirmation.scss';
+@import './meal_posts/_food_item_fields.scss';
 
 .upvote,
 .downvote {
