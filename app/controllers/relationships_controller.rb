@@ -32,7 +32,7 @@ class RelationshipsController < ApplicationController
   end
 
   def destroy
-    @followed_user = Relationship.find_by(params[:id])&.followed
+    @followed_user = Relationship.find_by(id: params[:id])&.followed
 
     # case when current_user is not following @followed user
     unless @followed_user
