@@ -76,7 +76,7 @@ bundle exec rspec
 - Voting はいいね(+1)と悪いね(-1)の２種類があり、自分の投稿に投票できない
 - 各 MealPost の合計得点に関して時間がかかりすぎるので counter_culture を使うべきだった(後の FoodItem の実装以降導入)
 
-### [# MealPost から[Up|Down]Voters 一覧を、User から(Un)favorite MealPosts の一覧を見れるようにする #11](https://github.com/kudojp/diet-app/pull/11)
+### [# MealPost から[Up|Down]Voters 一覧を、User から[|Un]favorite MealPosts の一覧を見れるようにする #11](https://github.com/kudojp/diet-app/pull/11)
 
 - あるユーザーが[いいね|悪いね]した投稿一覧、ある投稿を[いいね|悪いね]したユーザ一覧をかえすエンドポイントを実装した。肝は[ここ](https://github.com/kudojp/diet-app/pull/11/files#diff-0185a9df92260be0d1b3fc746cb6264b)と[ここ](https://github.com/kudojp/diet-app/pull/11/files#diff-4676c008b11a5480d73d4a6de01e45b9)。
 
