@@ -107,7 +107,7 @@ bundle exec rspec
 
 ### [# Facebook 認証で登録した User が後からパスワードを設定できるようにする #8](https://github.com/kudojp/diet-app/pull/8)
 
-- 上の PR の続き。仕様設計は[ここ](<[https://github.com/kudojp/diet-app/pull/8](https://github.com/kudojp/diet-app/pull/8)>)
+- 上の PR の続き。仕様設計は[ここ](https://github.com/kudojp/diet-app/pull/8#issue-407352113)
 - やったことは主に 3 つ
   1. facebook 認証で登録したユーザーが後から password を設定することができるようにする
   2. 現在の profile 更新ページを 2 つに分ける。これは、身長体重などは password なしで変更できるようにし、password に関しては現在の password 入力が求めるため。
