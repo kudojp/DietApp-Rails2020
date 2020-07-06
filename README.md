@@ -2,11 +2,11 @@
 
 ## 概要
 
-これは、日々自分が食べたものを投稿し、それをフォロワーと共有するダイエットアプリです。
+Ruby on Railsで実装された、日々の食事記録を投稿できるSNSアプリです。
 
 ## 本番環境
 
-https://diet-app-2020.herokuapp.com/users/sign_in
+https://diet-app-2020.herokuapp.com
 
 ## ローカル環境での機動方法
 
@@ -21,45 +21,102 @@ bundle exec rails s
 bundle exec rspec
 ```
 
+
+## 技術選定
+
+### 仕様言語とミドルウェア
+- Ruby on Rails (Ruby=2.7.0, Rails=6.0.2)
+- HTML(erb), SCSS, JavaScript
+- PostgreSQL
+- Heroku
+
+
+### 使用ライブラリ
+
+Ruby
+
+|ライブラリ名|使用用途|
+|----|----|
+|devise|認証機能のために使用|
+|omniauth|Facebook認証のためにdeviseとともに使用|
+|cocoon|cocoon-js(JSライブラリ)とともに、ネストされたモデルのフォーム作成のために使用|
+|counter_culture|あるレコードに関連するレコードの個数や値の集計(カウンターキャッシュ)機能のために使用|
+|rubocop|ローカル環境でのコードの静的解析のために使用|
+|rspec|モデル層のテストのために使用|
+|factory_bot_rails|rspecでダミーのモデルのインスタンスを作成するために使用|
+
+#### CSS
+
+|ライブラリ名|使用用途|
+|----|----|
+|bootstrap|デザインテンプレートとして使用|
+
+#### JavaScript
+
+|ライブラリ名|使用用途|
+|----|----|
+|jquery|Ajax通信のためなどに使用|
+|flatpickr|カレンダーから日時を選択するUIのために使用|
+|cocoon-js|cocoon(gem)とともに、ネストされたモデルのフォーム作成のために使用|
+
+
+
 ## 機能一覧
 
-- ユーザー登録・ログイン機能（devise を使用）
-- フォロー機能 (Ajax を使用)
-- 全ユーザー/フォロワー/フォロイングの一覧表示
-- 食事ポスト(複数の食品からなる)の投稿機能（Ajax を使用）
-- 食事ポストの投稿削除機能 (Ajax を使用)
-- ポストへの投票(↑/↓)機能の追加
-- 自分がフォローしているユーザの投稿をフィードに表示する機能
-- 自分が[いいね|悪いね]した投稿一覧、ある投稿を[いいね|悪いね]したユーザ一の一覧を閲覧する機能
-- Facebook 認証でのサインイン、ログイン機能
+- パスワード認証/Facebook認証の2種類のサインアップ/ログイン機能
+- 食事ポスト(最低1つ以上の食品目で構成される)の投稿機能/投稿削除機能
+- 他人の食事ポストへの投票(いいね/悪いね)機能
+- ユーザー間のフォロー機能
+- 自分がフォローしているユーザの投稿を表示するフィード機能
 
-## 機能の TODOs
+## DB設計
 
-- Google 認証でのサインイン、ログイン機能
-- フォロワー/フォロイング数の表示
-- プロフィールに画像を追加
-- ポストへのコメント機能の追加
-- DM チャットやビデオ通話機能の追加
+#### usersテーブル
 
-## 環境開発向上のための TODOs
+|カラム名|型|その他|
+|----|----|----|
+|name|||
+|amount|||
+|calory|||
+|meal_post_id|||
+|created_at|||
+|updated_at||||
 
-- Github Action による CI/CD の導入
-- Docker の導入
-- AWS 上にデプロイ
-- UI の洗練
+#### meal_postsテーブル
 
-## 使用技術
+|カラム名|型|その他|
+|----|----|----|
+|content|||
+|time|||
+|user_id|||
+|created_at|||
+|updated_at|||
+|total_calories|||
+|food_items_count|||
+|food_items_with_calories_count|||
+|created_at|||
+|updated_at|||
 
-- Ruby 2.7.0
-- Rails 6.0.2
-- RSpec
-- Heroku
-- GitHub, Git
+#### relationshipsテーブル
 
-## テスト
+|カラム名|型|その他|
+|----|----|----|
+|follower_id||
+|followed_id||
+|created_at|||
+|updated_at|||
 
-- Rspec
-  - 単体テスト（モデルクラスのみ）
+#### votesテーブル
+
+|カラム名|型|その他|
+|----|----|----|
+|user_id|||
+|meal_post_id|||
+|is_upvote|||
+|created_at|||
+|updated_at|||
+
+
 
 ## 苦労した点、開発の軌跡
 
@@ -119,3 +176,24 @@ bundle exec rspec
 - MealPost の has_nested_attributes_for で FoodItem モデルを実装した
 - cocoon gem を使用することで、FoodItems のフォームの数を柔軟に加減できる UI を構築した。最初にページをロードした時は FoodItem のフォームは 3 つ表示されているが、、(➕) ボタンを押すことでフォームの数を増やしたり、(✖︎) ボタンを押すことでフォームの数を減らしたりできるようにした
 - FoodItem はそれぞれカロリー値を入力できる(必須ではない)。MealPost ではそれに属する FoodItems のカロリーの総和を`15kcal+`といった形式で表示する。(`+`はその MealPost に属する全ての FoodItem にカロリーが入力されている場合のみ省略される)これを実現するため、counter_culture gem を導入し、 meal_posts テーブルに`total_calories` `food_items_count` `food_items_with_calories_count`という 3 つのカラムを付け加えた。
+
+## その他
+
+<details><summary>TODOs</summary><div>
+
+### 機能の TODOs
+
+- Google 認証でのサインイン、ログイン機能
+- フォロワー/フォロイング数の表示
+- プロフィールに画像を追加
+- ポストへのコメント機能の追加
+- DM チャットやビデオ通話機能の追加
+
+### 環境開発向上のための TODOs
+
+- Github Action による CI/CD の導入
+- Docker の導入
+- AWS 上にデプロイ
+- UI の洗練
+
+</div></details>
