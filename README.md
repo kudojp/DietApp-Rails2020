@@ -72,49 +72,122 @@ bundle exec rspec
 
 #### usersテーブル
 
-|カラム名|型|その他|
-|----|----|----|
-|name|||
-|amount|||
-|calory|||
-|meal_post_id|||
-|created_at|||
-|updated_at||||
+
+|         Column         |              Type             | Nullable |              Default   |           
+|-----|----|----|----|
+| id                     | bigint                         | not null | nextval('users_id_seq'::regclass)|
+| email                  | character varying              | not null | |
+| account_id             | character varying              | not null | |
+| name                   | character varying              | not null | |
+| encrypted_password     | character varying              |          | ''::character varying|
+| is_male                | boolean                        |          | |
+| height                 | double precision               |          | |
+| weight                 | double precision               |          | |
+| comment                | text                           |          | |
+| reset_password_token   | character varying              |          | |
+| reset_password_sent_at | timestamp without time zone    |          | |
+| remember_created_at    | timestamp without time zone    |          | |
+| created_at             | timestamp(6) without time zone | not null | |
+| updated_at             | timestamp(6) without time zone | not null | |
+| provider               | character varying              |          | |
+| uid                    | character varying              |          | |
+
+```
+Indexes:
+    "users_pkey" PRIMARY KEY, btree (id)
+    "index_users_on_account_id" UNIQUE, btree (account_id)
+    "index_users_on_email" UNIQUE, btree (email)
+    "index_users_on_reset_password_token" UNIQUE, btree (reset_password_token)
+Referenced by:
+    TABLE "meal_posts" CONSTRAINT "fk_rails_07c05f4a8d" FOREIGN KEY (user_id) REFERENCES users(id)
+    TABLE "votes" CONSTRAINT "fk_rails_c9b3bef597" FOREIGN KEY (user_id) REFERENCES users(id)
+```
+
+
 
 #### meal_postsテーブル
 
-|カラム名|型|その他|
-|----|----|----|
-|content|||
-|time|||
-|user_id|||
-|created_at|||
-|updated_at|||
-|total_calories|||
-|food_items_count|||
-|food_items_with_calories_count|||
-|created_at|||
-|updated_at|||
+|         Column         |              Type             | Nullable |              Default   |           
+|-----|----|----|----|
+| id                             | bigint                         | not null | nextval('meal_posts_id_seq'::regclass)|
+| content                        | text                           |          | |
+| time                           | timestamp without time zone    |          | |
+| user_id                        | bigint                         |          | |
+| created_at                     | timestamp(6) without time zone | not null | |
+| updated_at                     | timestamp(6) without time zone | not null | |
+| total_calories                 | integer                        |          | |
+| food_items_count               | integer                        | not null | 0 |
+| food_items_with_calories_count | integer                        | not null | 0 |
+ 
+```
+Indexes:
+    "meal_posts_pkey" PRIMARY KEY, btree (id)
+    "index_meal_posts_on_user_id" btree (user_id)
+Foreign-key constraints:
+    "fk_rails_07c05f4a8d" FOREIGN KEY (user_id) REFERENCES users(id)
+Referenced by:
+    TABLE "food_items" CONSTRAINT "fk_rails_333bcce849" FOREIGN KEY (meal_post_id) REFERENCES meal_posts(id)
+    TABLE "votes" CONSTRAINT "fk_rails_bbb5af58df" FOREIGN KEY (meal_post_id) REFERENCES meal_posts(id)
+```
+
+
+#### food_itemsテーブル
+
+|         Column         |              Type             | Nullable |              Default   |           
+|-----|----|----|----|
+|id           | bigint            | not null | nextval('food_items_id_seq'::regclass)|
+|name         | character varying | not null | |
+|amount       | character varying |          | |
+|calory       | bigint            |          | |
+|meal_post_id | bigint            | not null | |
+
+```
+Indexes:
+    "food_items_pkey" PRIMARY KEY, btree (id)
+    "index_food_items_on_meal_post_id" btree (meal_post_id)
+Foreign-key constraints:
+    "fk_rails_333bcce849" FOREIGN KEY (meal_post_id) REFERENCES meal_posts(id)
+```
 
 #### relationshipsテーブル
 
-|カラム名|型|その他|
-|----|----|----|
-|follower_id||
-|followed_id||
-|created_at|||
-|updated_at|||
+|         Column         |              Type             | Nullable |              Default   |           
+|-----|----|----|----|
+| id          | bigint                        | not null | nextval('relationships_id_seq'::regclass)|
+| follower_id | integer                       |          | |
+| followed_id | integer                       |          | |
+| created_at  | timestamp(6) without time zone| not null | |
+| updated_at  | timestamp(6) without time zone| not null | |
+
+```
+Indexes:
+    "relationships_pkey" PRIMARY KEY, btree (id)
+    "index_relationships_on_follower_id_and_followed_id" UNIQUE, btree (follower_id, followed_id)
+    "index_relationships_on_followed_id" btree (followed_id)
+    "index_relationships_on_follower_id" btree (follower_id)
+```
 
 #### votesテーブル
 
-|カラム名|型|その他|
-|----|----|----|
-|user_id|||
-|meal_post_id|||
-|is_upvote|||
-|created_at|||
-|updated_at|||
+|         Column         |              Type             | Nullable |              Default   |           
+|-----|----|----|----|
+| id           | bigint                        | not null | nextval('votes_id_seq'::regclass)|
+| user_id      | bigint                        | not null | |
+| meal_post_id | bigint                        | not null | |
+| is_upvote    | boolean                       | not null | |
+| created_at   | timestamp(6) without time zone| not null | |
+| updated_at   | timestamp(6) without time zone| not null | |
 
+```
+Indexes:
+    "votes_pkey" PRIMARY KEY, btree (id)
+    "index_votes_on_user_id_and_meal_post_id" UNIQUE, btree (user_id, meal_post_id)
+    "index_votes_on_meal_post_id" btree (meal_post_id)
+    "index_votes_on_user_id" btree (user_id)
+Foreign-key constraints:
+    "fk_rails_bbb5af58df" FOREIGN KEY (meal_post_id) REFERENCES meal_posts(id)
+    "fk_rails_c9b3bef597" FOREIGN KEY (user_id) REFERENCES users(id)
+```
 
 ## 苦労した点、開発の軌跡
 
