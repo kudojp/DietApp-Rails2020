@@ -204,7 +204,7 @@ Foreign-key constraints:
 ```
 </div></details>
 
-## 各PRで苦労した点、こだわった点(クリックして展開)
+## 苦労した点、こだわった点(クリックして展開)
 
 <details><summary>ログイン機構、User 間の Follow 機能、MealPost の投稿機能の追加</summary><div>
 
@@ -276,20 +276,24 @@ Foreign-key constraints:
 
 </div></details>
 
-## TODOs
+## TODOs(クリックして展開)
 
-**機能の TODOs**
+<details><summary>機能の追加</summary><div>
 
-- Google 認証でのサインイン、ログイン機能
+
+- Google, Twitter認証でのサインイン、ログイン機能
 - フォロワー/フォロイング数の表示
 - プロフィールに画像を追加
 - ポストへのコメント機能の追加
 - DM チャットやビデオ通話機能の追加
 
-**開発環境改善のための TODOs**
+</div></details>
+
+<details><summary>開発環境、デプロイ環境の改善</summary><div>
 
 - Github Action による CI/CD の導入
 - Docker の導入
 - AWS 上にデプロイ
 - UI の洗練
 
+</div></details>
