@@ -204,7 +204,7 @@ Foreign-key constraints:
 ```
 </div></details>
 
-## 苦労した点、こだわった点(クリックして展開)
+## 各PRで苦労した点、こだわった点(クリックして展開)
 
 <details><summary>ログイン機構、User 間の Follow 機能、MealPost の投稿機能の追加</summary><div>
 
