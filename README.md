@@ -2,7 +2,9 @@
 
 ## 概要
 
-Ruby on Railsで実装された、日々の食事記録を投稿できるSNSアプリです。
+- これは、Ruby on Railsで実装された、日々の食事記録を投稿できるSNSアプリである。
+- このレポジトリではPR運用をしており、各機能の詳細な設計や開発のログはそのPRページに記入してある。
+- CSS, JavaScriptのアセット管理はwebpackを用いている。
 
 ## 本番環境
 
@@ -30,10 +32,9 @@ bundle exec rspec
 - PostgreSQL
 - Heroku
 
-
 ### 使用ライブラリ
 
-Ruby
+#### Ruby
 
 |ライブラリ名|使用用途|
 |----|----|
@@ -49,7 +50,7 @@ Ruby
 
 |ライブラリ名|使用用途|
 |----|----|
-|bootstrap|デザインテンプレートとして使用|
+|Bootstrap|デザインテンプレートとして使用|
 
 #### JavaScript
 
@@ -58,8 +59,6 @@ Ruby
 |jquery|Ajax通信のためなどに使用|
 |flatpickr|カレンダーから日時を選択するUIのために使用|
 |cocoon-js|cocoon(gem)とともに、ネストされたモデルのフォーム作成のために使用|
-
-
 
 ## 機能一覧
 
@@ -115,7 +114,6 @@ Ruby
 |is_upvote|||
 |created_at|||
 |updated_at|||
-
 
 
 ## 苦労した点、開発の軌跡
