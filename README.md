@@ -5,23 +5,35 @@
 - これは、Ruby on Railsで実装された、日々の食事記録を投稿できるSNSアプリである。
 - このレポジトリではPR運用をしており、各機能の詳細な設計や開発のログはそのPRページに記入してある。
 - CSS, JavaScriptのアセット管理はwebpackを用いている。
+- モデル層に関してはrspecによるテストを実装している。
 
 ## 本番環境
 
 https://diet-app-2020.herokuapp.com
 
-## ローカル環境での機動方法
+以下のemailとパスワードでログインして動作確認が可能です。    
+|email|password|
+|----|----|
+|`tester@test.com`|`testtest`|
 
+
+## ローカル環境での起動手順
+
+1. このレポジトリをローカルにクローンする。
+2. PosgreSQLサーバーを起動し、データベースのマイグレーションを行う。
 ```
 pg_ctl -D /usr/local/var/postgres start
-bundle exec rails s
+bundle exec rails db:create
+bundle exec rails db:migrate
 ```
 
-## ローカル環境でのテスト走らせ方
+3. Railsサーバーを起動する。
 
 ```
-bundle exec rspec
+bundle exec rails serve
 ```
+
+4. ブラウザから`localhost:304.00`にアクセス。
 
 
 ## 技術選定
