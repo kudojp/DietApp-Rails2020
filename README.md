@@ -38,7 +38,7 @@ $ bundle exec rails serve
 
 ## 技術選定
 
-### 仕様言語とミドルウェア
+### 使用言語とミドルウェア
 - Ruby on Rails (Ruby=2.7.0, Rails=6.0.2)
 - HTML(erb), SCSS, JavaScript
 - PostgreSQL
