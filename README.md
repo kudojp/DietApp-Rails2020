@@ -68,10 +68,9 @@ bundle exec rspec
 - ユーザー間のフォロー機能
 - 自分がフォローしているユーザの投稿を表示するフィード機能
 
-## DB設計
+## DB設計(クリックして展開)
 
-#### usersテーブル
-
+<details><summary>usersテーブル</summary><div>
 
 |         Column         |              Type             | Nullable |              Default   |           
 |-----|----|----|----|
@@ -103,9 +102,29 @@ Referenced by:
     TABLE "votes" CONSTRAINT "fk_rails_c9b3bef597" FOREIGN KEY (user_id) REFERENCES users(id)
 ```
 
+</div></details>
 
+<details><summary>relationshipsテーブル</summary><div>
 
-#### meal_postsテーブル
+|         Column         |              Type             | Nullable |              Default   |           
+|-----|----|----|----|
+| id          | bigint                        | not null | nextval('relationships_id_seq'::regclass)|
+| follower_id | integer                       |          | |
+| followed_id | integer                       |          | |
+| created_at  | timestamp(6) without time zone| not null | |
+| updated_at  | timestamp(6) without time zone| not null | |
+
+```
+Indexes:
+    "relationships_pkey" PRIMARY KEY, btree (id)
+    "index_relationships_on_follower_id_and_followed_id" UNIQUE, btree (follower_id, followed_id)
+    "index_relationships_on_followed_id" btree (followed_id)
+    "index_relationships_on_follower_id" btree (follower_id)
+```
+
+</div></details>
+
+<details><summary>meal_postsテーブル</summary><div>
 
 |         Column         |              Type             | Nullable |              Default   |           
 |-----|----|----|----|
@@ -129,9 +148,9 @@ Referenced by:
     TABLE "food_items" CONSTRAINT "fk_rails_333bcce849" FOREIGN KEY (meal_post_id) REFERENCES meal_posts(id)
     TABLE "votes" CONSTRAINT "fk_rails_bbb5af58df" FOREIGN KEY (meal_post_id) REFERENCES meal_posts(id)
 ```
+</div></details>
 
-
-#### food_itemsテーブル
+<details><summary>food_itemsテーブル</summary><div>
 
 |         Column         |              Type             | Nullable |              Default   |           
 |-----|----|----|----|
@@ -148,26 +167,9 @@ Indexes:
 Foreign-key constraints:
     "fk_rails_333bcce849" FOREIGN KEY (meal_post_id) REFERENCES meal_posts(id)
 ```
+</div></details>
 
-#### relationshipsテーブル
-
-|         Column         |              Type             | Nullable |              Default   |           
-|-----|----|----|----|
-| id          | bigint                        | not null | nextval('relationships_id_seq'::regclass)|
-| follower_id | integer                       |          | |
-| followed_id | integer                       |          | |
-| created_at  | timestamp(6) without time zone| not null | |
-| updated_at  | timestamp(6) without time zone| not null | |
-
-```
-Indexes:
-    "relationships_pkey" PRIMARY KEY, btree (id)
-    "index_relationships_on_follower_id_and_followed_id" UNIQUE, btree (follower_id, followed_id)
-    "index_relationships_on_followed_id" btree (followed_id)
-    "index_relationships_on_follower_id" btree (follower_id)
-```
-
-#### votesテーブル
+<details><summary>votesテーブル</summary><div>
 
 |         Column         |              Type             | Nullable |              Default   |           
 |-----|----|----|----|
@@ -188,6 +190,7 @@ Foreign-key constraints:
     "fk_rails_bbb5af58df" FOREIGN KEY (meal_post_id) REFERENCES meal_posts(id)
     "fk_rails_c9b3bef597" FOREIGN KEY (user_id) REFERENCES users(id)
 ```
+</div></details>
 
 ## 苦労した点、開発の軌跡
 
@@ -248,11 +251,9 @@ Foreign-key constraints:
 - cocoon gem を使用することで、FoodItems のフォームの数を柔軟に加減できる UI を構築した。最初にページをロードした時は FoodItem のフォームは 3 つ表示されているが、、(➕) ボタンを押すことでフォームの数を増やしたり、(✖︎) ボタンを押すことでフォームの数を減らしたりできるようにした
 - FoodItem はそれぞれカロリー値を入力できる(必須ではない)。MealPost ではそれに属する FoodItems のカロリーの総和を`15kcal+`といった形式で表示する。(`+`はその MealPost に属する全ての FoodItem にカロリーが入力されている場合のみ省略される)これを実現するため、counter_culture gem を導入し、 meal_posts テーブルに`total_calories` `food_items_count` `food_items_with_calories_count`という 3 つのカラムを付け加えた。
 
-## その他
+## TODOs
 
-<details><summary>TODOs</summary><div>
-
-### 機能の TODOs
+**機能の TODOs**
 
 - Google 認証でのサインイン、ログイン機能
 - フォロワー/フォロイング数の表示
@@ -260,11 +261,10 @@ Foreign-key constraints:
 - ポストへのコメント機能の追加
 - DM チャットやビデオ通話機能の追加
 
-### 環境開発向上のための TODOs
+**開発環境改善のための TODOs**
 
 - Github Action による CI/CD の導入
 - Docker の導入
 - AWS 上にデプロイ
 - UI の洗練
 
-</div></details>
