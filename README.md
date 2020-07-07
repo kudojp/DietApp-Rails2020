@@ -269,8 +269,7 @@ Foreign-key constraints:
 
 <details><summary>MealPost のサブ項目として FoodItem を追加する</summary><div>
 
-- [PR13](https://github.com/kudojp/diet-app/pull/13)で実装。
-- 仕様設計は[ここ](https://github.com/kudojp/diet-app/pull/13#issue-409025615)、時間かかったのは[ここ](https://github.com/kudojp/diet-app/pull/13#issuecomment-629778398)と[ここ](https://github.com/kudojp/diet-app/pull/13#issuecomment-629842322)
+- [PR13](https://github.com/kudojp/diet-app/pull/13)で実装。仕様設計は[ここ](https://github.com/kudojp/diet-app/pull/13#issue-409025615)、時間かかったのは[ここ](https://github.com/kudojp/diet-app/pull/13#issuecomment-629778398)と[ここ](https://github.com/kudojp/diet-app/pull/13#issuecomment-629842322)。
 - MealPost の has_nested_attributes_for で FoodItem モデルを実装した
 - cocoon gem を使用することで、FoodItems のフォームの数を柔軟に加減できる UI を構築した。最初にページをロードした時は FoodItem のフォームは 3 つ表示されているが、、(➕) ボタンを押すことでフォームの数を増やしたり、(✖︎) ボタンを押すことでフォームの数を減らしたりできるようにした
 - FoodItem はそれぞれカロリー値を入力できる(必須ではない)。MealPost ではそれに属する FoodItems のカロリーの総和を`15kcal+`といった形式で表示する。(`+`はその MealPost に属する全ての FoodItem にカロリーが入力されている場合のみ省略される)これを実現するため、counter_culture gem を導入し、 meal_posts テーブルに`total_calories` `food_items_count` `food_items_with_calories_count`という 3 つのカラムを付け加えた。
