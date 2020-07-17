@@ -3,15 +3,17 @@
     <div class="float-right">
       <% if user_signed_in? %>
 
-        <div >
-          <%= link_to "All Users", users_path %>
-        </div>
+        <%= link_to users_path do %>
+          <div class="fa fa-address-card"></div>
+        <% end %>
+        <%= link_to '#TODO' do %>
+          <div class="fa fa-envelope"></div>
+        <% end %>
 
-        <div class="dropdown show">
+        <span class="dropdown show">
           <a class="btn btn-white dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= current_user.name%>
+            <%= 'Settings' %>
           </a>
-
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <%= link_to "Profile", user_path(current_user), class: "dropdown-item" %>
             <%= link_to "Edit Profile", profile_edit_path, class: "dropdown-item" %>
@@ -19,7 +21,8 @@
             <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item", data: { confirm: '本当にログアウトしますか？' } %>
             <%= link_to "Cancel Account", cancellation_confirmation_path, class: "dropdown-item" %>
           </div>
-        </div>
+        </span>
+
       <% else %>
         <%= link_to "Log In", new_user_session_path, class: "btn btn-outline-primary" %>
         <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-outline-primary" %>
