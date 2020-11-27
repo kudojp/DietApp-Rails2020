@@ -77,7 +77,7 @@ class MealPostsController < ApplicationController
 
   def show
     @meal_post = MealPost.find(params[:id])
-    @is_own_meal_post = @meal_post.id == current_user.id
+    @is_own_meal_post = @meal_post.user.id == current_user.id
   end
 
   def upvoted_index
