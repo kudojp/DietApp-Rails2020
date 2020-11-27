@@ -7,6 +7,6 @@ module MealPostsHelper
   end
 
   def total_count_and_calories_of(meal_post)
-    "#{meal_post.food_items_count}品 #{total_calories_of(meal_post)}"
+    "#{meal_post.food_items_count}品 合計#{total_calories_of(meal_post)}"
   end
 end
