@@ -1,4 +1,4 @@
-<h2>このMealPostの詳細</h2>
+<h1>このMealPostの詳細</h1>
 
 <%= render partial: 'meal_post', locals: {meal_post: @meal_post} %>
 <br>
@@ -6,17 +6,24 @@
 
 
 <div class="row">
-  <div class="col-6">
-    <%= render partial: 'total_calories', locals: {meal_post: @meal_post}%>
+  <div class="col-5">
+    <% if @is_own_meal_post %>
+      <h3>このMealPostを編集する</h3>
+      <%= render partial: 'meal_posts/new', locals: {new_meal_post: @meal_post} %>
+    <% else %>
+      <h3>含まれる品目一覧</h3>
+      <% @meal_post.food_items.each do |food_item| %>
+        <ul>
+          <li><%= render partial: 'food_items/food_item', locals: {food_item: food_item} %></li>
+        </ul>
+      <% end %>
+    <% end %>
   </div>
 
-  <% if @is_own_meal_post %>
-    <div class="col-6">
-      <%= render partial: 'meal_posts/new', locals: {new_meal_post: @meal_post} %>
-    </div>
-  <% end %>
+  <div class="col-3"></div>
 
-
-
-
+  <div class="col-4 mealpost-detail">
+    <h3>総カロリー</h3>
+    <h1><%= total_calories_of(@meal_post) %><h1>
+  </div>
 </div>
