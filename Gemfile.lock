@@ -80,7 +80,7 @@ GEM
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
     childprocess (3.0.0)
-    cocoon (1.2.14)
+    cocoon (1.2.15)
     coderay (1.1.3)
     concurrent-ruby (1.1.8)
     counter_culture (2.8.0)
