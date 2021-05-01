@@ -1,4 +1,8 @@
-# ダイエットアプリ
+# Diet App
+
+
+<details>
+<summary>日本語の説明はここをクリックして展開</summary>
 
 ## 概要
 
@@ -297,3 +301,7 @@ Foreign-key constraints:
 - UI の洗練
 
 </div></details>
+
+
+</details>
+
