@@ -1,0 +1,35 @@
+version: 2
+updates:
+- package-ecosystem: bundler
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "20:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: rubocop
+    versions:
+    - 1.11.0
+    - 1.12.0
+    - 1.12.1
+  - dependency-name: listen
+    versions:
+    - 3.5.0
+  - dependency-name: bootsnap
+    versions:
+    - 1.7.3
+  - dependency-name: rspec-rails
+    versions:
+    - 5.0.0
+  - dependency-name: counter_culture
+    versions:
+    - 2.7.0
+  - dependency-name: faker
+    versions:
+    - 2.16.0
+  - dependency-name: omniauth
+    versions:
+    - 2.0.3
+  - dependency-name: nokogiri
+    versions:
+    - 1.11.1
