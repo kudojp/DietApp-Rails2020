@@ -38,4 +38,5 @@ Rails.application.routes.draw do
     get :downvoters, to: 'users#downvoters_index'
   end
   resources :votes, only: %i[create destroy]
+  resources :conversations, only: %i[index show]
 end
