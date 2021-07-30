@@ -353,7 +353,7 @@ $ bundle exec rails serve
 - PostgreSQL
 - Heroku
 
-### Used libraries
+### Used Libraries
 
 #### Ruby
 
@@ -513,7 +513,7 @@ Foreign-key constraints:
 ```
 </div></details>
 
-## 苦労した点、こだわった点(クリックして展開)
+## System Designs (Click to open!)
 
 <details><summary>ログイン機構、User 間の Follow 機能、MealPost の投稿機能の追加</summary><div>
 
@@ -533,19 +533,20 @@ Foreign-key constraints:
 
 </div></details>
 
-<details><summary>Facebook 認証によるサインインとログイン機能の追加</summary><div>
+<details><summary>Facebook authentication for signing up and logging in</summary><div>
 
-- [PR#4](https://github.com/kudojp/diet-app/pull/4)で実装。仕様設計は[ここ](https://github.com/kudojp/diet-app/pull/4#issue-405645108)。
-- 従来の devise を用いたメールアドレスとパスワードでのログイン形式に加え、ominiauth による Facebook 認証を加えた。
-- 本システムでは以下の認証システムをとる
+- Implemented in [PR#4](https://github.com/kudojp/diet-app/pull/4). Specification is [here](https://github.com/kudojp/diet-app/pull/4#issue-405645108) in Japanese.
+- In addition to an password authentication implemented with gem 'devise', Facebook authentication with gem 'ominiauth' is implemented.
+- Specification of user experience flow is:
 
-  1.  `FacebookでLogin`ボタンを押下
-  2.  Facebook にリダイレクトされ、そこでログインかつ許可ボタンを押下。
-  3.  アプリにリダレクトされる。この時点で、認可されて得られる(provider, uid)に対応する User が存在すれば自動的にその User としてログインされ、ホームへ飛ばされる。User が存在しない場合は Login されずにホームへ飛ばされる。
+  1.  Click `Login in Facebook` button.
+  2.  Redirected to Facebook. Click `Login` button and then click `Admit` button in the next page.
+  3.  Redirected back to the app. At this point, if a user record with (provider, facebook_uid) retrieved from Facebook exists, the user automatically logs in , and then is taken to the root the root page. If such a user record does not exist, a new user record is created and then the user is taken to the root page.
 
-- このために
-  1. `OmniauthCallbacksController`と`FacebookUsersController`の 2 つのコントローラを実装した
-  2. User テーブルに`provider`と`uid`の２カラムを付け足した(`provider`には`facebook`という文字列が収納される。これは後に Google などの他の外部認証を加えることを想定して作ったカラムである)
+ - For this, in terms of deign, 
+
+  1. Two controllers including `OmniauthCallbacksController` and `FacebookUsersController` are implemented.
+  2. Add two columns (`provider`, `uid`) are added. (`provider`には`facebook`という文字列が収納される。これは後に Google などの他の外部認証を加えることを想定して作ったカラムである)
 - この PR 時点では、 Facecbook 認証では Facebook の認可サーバから取ってきた`provider`と`uid`に合致する列が users テーブルにが存在すれば認証完了、としていた。
 - この PR 時点では Facecbook 認証したユーザは password 設定ができない。故に profile や password 更新ができない。これらは以下の PR で直された。
 
