@@ -1,5 +1,7 @@
 # Diet App
 
+![image](https://user-images.githubusercontent.com/44487754/150687612-05586c1f-e58c-4d61-8522-c4e070273bbf.png)
+
 
 <details>
 <summary>日本語の説明はここをクリックして展開</summary>
