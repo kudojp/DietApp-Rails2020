@@ -1,6 +1,7 @@
 # Diet App
 
-![image](https://user-images.githubusercontent.com/44487754/150687612-05586c1f-e58c-4d61-8522-c4e070273bbf.png)
+![image](https://user-images.githubusercontent.com/44487754/152339292-12ddfe41-0ba3-4048-9e3f-18944c43f710.png)
+
 
 
 <details>
@@ -12,6 +13,14 @@
 - このレポジトリではPR運用をしており、各機能の詳細な設計や開発のログはそのPRページに記入してある。
 - CSS, JavaScriptのアセット管理はwebpackを用いている。
 - モデル層に関してはrspecによるテストを実装している。
+    
+### 機能一覧
+
+- パスワード認証/Facebook認証の2種類のサインアップ/ログイン機能
+- 食事ポスト(最低1つ以上の食品目で構成される)の投稿機能/投稿削除機能
+- 他人の食事ポストへの投票(いいね/悪いね)機能
+- ユーザー間のフォロー機能
+- 自分がフォローしているユーザの投稿を表示するフィード機能
 
 ## 本番環境
 
@@ -77,14 +86,6 @@ $ bundle exec rails serve
 |jquery|Ajax通信のためなどに使用|
 |flatpickr|カレンダーから日時を選択するUIのために使用|
 |cocoon-js|cocoon(gem)とともに、ネストされたモデルのフォーム作成のために使用|
-
-## 機能一覧
-
-- パスワード認証/Facebook認証の2種類のサインアップ/ログイン機能
-- 食事ポスト(最低1つ以上の食品目で構成される)の投稿機能/投稿削除機能
-- 他人の食事ポストへの投票(いいね/悪いね)機能
-- ユーザー間のフォロー機能
-- 自分がフォローしているユーザの投稿を表示するフィード機能
 
 ## DB設計(クリックして展開)
 
@@ -315,6 +316,15 @@ Foreign-key constraints:
 - You can sign up with your email or with your facebook account.
 - CSS, JavaScript files are bundled by webpack.
 - Rspec test cases are implemented for model layer.
+    
+### Features
+
+- Password authentication and facebook authentication
+- Creating/deleting a post of each meal (which consists of one or more food items)
+- Like/dislike posts by other users
+- Follow/unfollow other users
+- Feed where posts from your followings are listed
+    
 ## URL
 
 https://diet-app-2020.herokuapp.com
@@ -382,14 +392,6 @@ $ bundle exec rails serve
 |jquery|For Ajax request and for DOM manipulations|
 |flatpickr|For UI to pick a date from a calendar|
 |cocoon-js|For input forms of nested models (combined with cocoon)|
-
-## Features
-
-- Password authentication and facebook authentication
-- Creating/deleting a post of each meal (which consists of one or more food items)
-- Like/dislike posts by other users
-- Follow/unfollow other users
-- Feed where posts from your followings are listed
 
 ## DB Design (Click to open!)
 
